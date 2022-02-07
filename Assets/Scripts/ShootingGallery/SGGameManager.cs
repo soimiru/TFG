@@ -6,7 +6,7 @@ public class SGGameManager : MonoBehaviour
 {
 
     public List<Transform> spawnPoints;
-    public GameObject patito;
+    public GameObject patitoR, patitoL;
     private int randomIndex;
 
     private void Awake()
@@ -27,13 +27,14 @@ public class SGGameManager : MonoBehaviour
     public void Spawn() {
         randomIndex = Random.Range(0, spawnPoints.Count);
         GameObject patitoNew;
-        patitoNew = (GameObject)Instantiate(patito, spawnPoints[randomIndex].position, Quaternion.identity);
         if (randomIndex < 3)
         {  //SPAWNS DERECHA
+            patitoNew = (GameObject)Instantiate(patitoR, spawnPoints[randomIndex].position, Quaternion.identity);
             patitoNew.GetComponentInChildren<Target>().myDirection = 0;
         }
         else 
         {  //SPAWNS IZQUIERDA
+            patitoNew = (GameObject)Instantiate(patitoL, spawnPoints[randomIndex].position, Quaternion.identity);
             patitoNew.GetComponentInChildren<Target>().myDirection = 1;
         }
         StartCoroutine(WaitForSpawn());
@@ -41,7 +42,7 @@ public class SGGameManager : MonoBehaviour
 
 
     private IEnumerator WaitForSpawn() {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(1);
 
         Spawn();
     }
