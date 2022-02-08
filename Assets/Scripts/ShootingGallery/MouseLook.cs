@@ -24,12 +24,12 @@ public class MouseLook : MonoBehaviour
         mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
         xRotation -= mouseY;    //Si fuese sumando, lo haría al revés.
-        xRotation = Mathf.Clamp(xRotation, -40f, 10f);
+        xRotation = Mathf.Clamp(xRotation, -30f, 10f);
 
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
 
         yRotation += mouseX;
-        yRotation = Mathf.Clamp(yRotation, -40f, 40f);
+        yRotation = Mathf.Clamp(yRotation, -35f, 35f);
         playerBody.rotation = Quaternion.Euler(0f, yRotation, 0f);
 
         //playerBody.Rotate(Vector3.up * mouseX); OTRA FORMA

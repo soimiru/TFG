@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 4941234426291987034}
   - component: {fileID: 4941234426291987035}
   m_Layer: 0
-  m_Name: PatitoR
+  m_Name: PatitoRC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -218,7 +218,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 77e6bf4c67c24df40bcc008448d7b0ed, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 0047e17f721b0ab42936abdd32315bec, type: 2}
+      objectReference: {fileID: 2100000, guid: b71422cd9fde84f4b8aef30620e39d48, type: 2}
     - target: {fileID: -7511558181221131132, guid: 77e6bf4c67c24df40bcc008448d7b0ed, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
