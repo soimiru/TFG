@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MouseLook : MonoBehaviour
@@ -33,7 +31,5 @@ public class MouseLook : MonoBehaviour
         playerBody.rotation = Quaternion.Euler(0f, yRotation, 0f);
 
         //playerBody.Rotate(Vector3.up * mouseX); OTRA FORMA
-        
-        
     }
 }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Target : MonoBehaviour
@@ -26,7 +24,6 @@ public class Target : MonoBehaviour
             //Direction 1 IZQUIERDA
             myParent.transform.Translate(Vector3.right * 2 * Time.deltaTime);
         }
-        
     }
 
     public void TakeDamage(float dmg)
@@ -40,6 +37,11 @@ public class Target : MonoBehaviour
     void Die()
     {
         parentAnimator.SetTrigger("Die");
-        //Destroy(gameObject);
     }
+
+    public void DestroyThis() {
+        Destroy(myParent);
+    }
+
+
 }

@@ -105,7 +105,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4941234426291987034}
-  - component: {fileID: 4941234426291987035}
+  - component: {fileID: 6282339046799272965}
   m_Layer: 0
   m_Name: PatitoRA
   m_TagString: Untagged
@@ -129,7 +129,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &4941234426291987035
+--- !u!95 &6282339046799272965
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
@@ -139,7 +139,7 @@ Animator:
   m_GameObject: {fileID: 4941234426291987033}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 6f8396c6887533b4c9c4f8d320ea4e27, type: 2}
+  m_Controller: {fileID: 9100000, guid: 1cbe7ea25d83e634494e2dd89746a46b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -173,7 +173,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 77e6bf4c67c24df40bcc008448d7b0ed, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 77e6bf4c67c24df40bcc008448d7b0ed, type: 3}
       propertyPath: m_LocalPosition.y
@@ -231,6 +231,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: patito
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 77e6bf4c67c24df40bcc008448d7b0ed, type: 3}
+      propertyPath: m_TagString
+      value: Target
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 77e6bf4c67c24df40bcc008448d7b0ed, type: 3}
 --- !u!1 &5211688783849777495 stripped
@@ -243,6 +247,22 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 77e6bf4c67c24df40bcc008448d7b0ed, type: 3}
   m_PrefabInstance: {fileID: 4941234426463769606}
   m_PrefabAsset: {fileID: 0}
+--- !u!54 &1018981992657468560
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5211688783849777495}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!64 &4941234426563731608
 MeshCollider:
   m_ObjectHideFlags: 0
