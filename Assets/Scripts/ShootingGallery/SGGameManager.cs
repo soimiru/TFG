@@ -1,12 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SGGameManager : MonoBehaviour
 {
 
     public List<Transform> spawnPoints;
     public List<GameObject> patitos;
+    public Canvas mainCanvas;
+    public Text pointsText;
+
+    private int points = 0;
     private int randomIndex;
 
     private void Awake()
@@ -45,5 +50,11 @@ public class SGGameManager : MonoBehaviour
         yield return new WaitForSeconds(1);
 
         Spawn();
+    }
+
+    public void AddPoints(int amount) 
+    {
+        points += amount;
+        pointsText.text = "Points: " + points;
     }
 }
