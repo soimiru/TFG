@@ -5,9 +5,10 @@ public class Target : MonoBehaviour
     GameObject myParent;
     Animator parentAnimator;
     SGGameManager gameMan;
-    public float health = 10f;
+    float health = 10f;
     private bool alive = true;
     public int myDirection;
+    public int type;
 
     void Awake()
     {
@@ -22,11 +23,11 @@ public class Target : MonoBehaviour
         if (myDirection == 0)
         {
             //Direction 0 DERECHA
-            myParent.transform.Translate(Vector3.left * 2 * Time.deltaTime);
+            myParent.transform.Translate(Vector3.left * (type * 2) * Time.deltaTime);
         }
         else {
             //Direction 1 IZQUIERDA
-            myParent.transform.Translate(Vector3.right * 2 * Time.deltaTime);
+            myParent.transform.Translate(Vector3.right * (type * 2) * Time.deltaTime);
         }
     }
 
@@ -47,7 +48,7 @@ public class Target : MonoBehaviour
     void Die()
     {
         parentAnimator.SetTrigger("Die");
-        gameMan.AddPoints(1003); //CAMBIAR DEPENDIENDO DEL PATITO
+        gameMan.AddPoints(100 * type); //CAMBIAR DEPENDIENDO DEL PATITO
     }
 
     public void DestroyThis() {

@@ -14,7 +14,8 @@ public class SGGameManager : MonoBehaviour
     private bool gameOver = false;
     private int points = 0;
     private int gameSeconds = 30;
-    private int randomIndex;
+    private float spawnTime = 1f;
+    private int randomIndex, randomDuckId;
 
     private void Awake()
     {
@@ -33,25 +34,36 @@ public class SGGameManager : MonoBehaviour
 
     public void StartGame() {
         //timeText.text = "00:" + gameSeconds;
-        InvokeRepeating("Spawn", 0f, 1.5f);
+        InvokeRepeating("Spawn", 0f, spawnTime);
         InvokeRepeating("CountDown", 0f, 1f);
     }
 
     public void Spawn() {
         if (!gameOver) {
             randomIndex = Random.Range(0, spawnPoints.Count);
-            GameObject patitoNew;
             if (randomIndex < 3)
             {  //SPAWNS DERECHA
-                patitoNew = (GameObject)Instantiate(patitos[0], spawnPoints[randomIndex].position, Quaternion.identity);
-                patitoNew.GetComponentInChildren<Target>().myDirection = 0;
+                SpawnRight(randomIndex);
             }
             else
             {  //SPAWNS IZQUIERDA
-                patitoNew = (GameObject)Instantiate(patitos[1], spawnPoints[randomIndex].position, Quaternion.identity);
-                patitoNew.GetComponentInChildren<Target>().myDirection = 1;
+                SpawnLeft(randomIndex);
             }
         }
+    }
+
+    void SpawnRight(int r) {
+        GameObject patitoNew;
+        randomDuckId = Random.Range(0, 3);
+        patitoNew = (GameObject)Instantiate(patitos[randomDuckId], spawnPoints[r].position, Quaternion.identity);
+        patitoNew.GetComponentInChildren<Target>().myDirection = 0;
+    }
+
+    void SpawnLeft(int r) {
+        GameObject patitoNew;
+        randomDuckId = Random.Range(3, 6);
+        patitoNew = (GameObject)Instantiate(patitos[randomDuckId], spawnPoints[r].position, Quaternion.identity);
+        patitoNew.GetComponentInChildren<Target>().myDirection = 1;
     }
 
     public void CountDown() {

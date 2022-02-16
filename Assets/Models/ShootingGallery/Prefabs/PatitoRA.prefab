@@ -291,3 +291,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 10
   myDirection: 0
+  type: 1

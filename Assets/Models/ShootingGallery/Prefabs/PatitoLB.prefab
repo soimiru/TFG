@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 950020366156320340}
   - component: {fileID: 6117695959815385692}
   m_Layer: 0
-  m_Name: PatitoLA
+  m_Name: PatitoLB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -218,7 +218,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 77e6bf4c67c24df40bcc008448d7b0ed, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 5d03ac09774dec14c90c211d16a10c50, type: 2}
+      objectReference: {fileID: 2100000, guid: ca2c4134e985d2e4c80c7ed349b4212a, type: 2}
     - target: {fileID: -7511558181221131132, guid: 77e6bf4c67c24df40bcc008448d7b0ed, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
@@ -290,4 +290,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myDirection: 1
-  type: 1
+  type: 2
