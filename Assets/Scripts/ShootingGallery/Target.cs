@@ -47,7 +47,7 @@ public class Target : MonoBehaviour
     void Die()
     {
         parentAnimator.SetTrigger("Die");
-        gameMan.AddPoints(100); //CAMBIAR DEPENDIENDO DEL PATITO
+        gameMan.AddPoints(1003); //CAMBIAR DEPENDIENDO DEL PATITO
     }
 
     public void DestroyThis() {

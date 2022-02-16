@@ -9,8 +9,6 @@ public class SGGameManager : MonoBehaviour
     public List<Transform> spawnPoints;
     public List<GameObject> patitos;
     public Canvas mainCanvas;
-    public Text pointsText;
-    public Text timeText;
 
     private SGUIManager uiMan;
     private bool gameOver = false;
@@ -59,7 +57,6 @@ public class SGGameManager : MonoBehaviour
     public void CountDown() {
         if (gameSeconds == 0)
         {
-            //timeText.text = "Time's UP!";
             uiMan.TimeManager(-1);
             gameOver = true;
             CancelInvoke("Count");
@@ -68,7 +65,6 @@ public class SGGameManager : MonoBehaviour
         {
             gameSeconds -= 1;
             uiMan.TimeManager(gameSeconds);
-            //timeText.text = "00:" + gameSeconds;
         }
         
     }
@@ -77,6 +73,7 @@ public class SGGameManager : MonoBehaviour
     public void AddPoints(int amount) 
     {
         points += amount;
-        pointsText.text = "Points: " + points;
+        uiMan.PointsManager(points);
+        //pointsText.text = "Points: " + points;
     }
 }
