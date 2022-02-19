@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class SGUIManager : MonoBehaviour
 {
@@ -12,10 +13,17 @@ public class SGUIManager : MonoBehaviour
     public List<Image> timePositions;
     public List<Image> pointsPositions;
 
+    private Animator anim;
+
     Color colorTransparent = new Color(0f, 0f, 0f, 0f);
     Color colorWhite = new Color(1f, 1f, 1f, 1f);
 
     int uni, dec, cen, mil, demill;
+
+    private void Awake()
+    {
+        anim = GetComponent<Animator>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -39,13 +47,23 @@ public class SGUIManager : MonoBehaviour
         if (paused)
         {
             Time.timeScale = 1f;
+            anim.SetTrigger("P_OUT");
             paused = false;
+            Cursor.lockState = CursorLockMode.Locked;
         }
         else {
             Time.timeScale = 0f;
+            anim.SetTrigger("P_IN");
             paused = true;
+            Cursor.lockState = CursorLockMode.None;
         }
     }
+
+    public void LoadSceneByName(string name) {
+        SceneManager.LoadScene(name);
+    }
+
+    #region INGAME 
 
     public void TimeManager(int number) {
 
@@ -145,4 +163,5 @@ public class SGUIManager : MonoBehaviour
             pointsPositions[4].sprite = timeImages[uni];
         }
     }
+    #endregion
 }
