@@ -25,10 +25,13 @@ public class MovablePiece : MonoBehaviour
     }
 
     public void Move(int newX, int newY, float time) {
-        /*piece.X = newY;
+        /*
+         * piece.X = newY;
         piece.Y = newY;
+        
 
         piece.transform.localPosition = piece.GridRef.GetWorldPosition(newX, newY);*/
+
         if (moveCoroutine != null) {
             StopCoroutine(moveCoroutine);
         }
@@ -38,7 +41,8 @@ public class MovablePiece : MonoBehaviour
 
     private IEnumerator MoveCoroutine(int newX, int newY, float time) {
 
-        piece.X = newY;
+        this.name = "Piece [" + newX + ", " + newY + "]";
+        piece.X = newX;
         piece.Y = newY;
 
         Vector3 startPos = transform.position;
@@ -49,6 +53,5 @@ public class MovablePiece : MonoBehaviour
             yield return 0;
         }
         piece.transform.position = endPos;
-
     }
 }

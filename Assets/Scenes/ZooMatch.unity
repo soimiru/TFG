@@ -160,6 +160,8 @@ MonoBehaviour:
     prefab: {fileID: 424845643145481299, guid: 8ac765f9a9feaee469b33e5f24a743b8, type: 3}
   - type: 1
     prefab: {fileID: 5990487634178464516, guid: ee82da69cde66f14ba85d94c27fbe72a, type: 3}
+  - type: 2
+    prefab: {fileID: 5990487634178464516, guid: cdc924df557e14847aab6672a5d19ee7, type: 3}
   backgroundPrefab: {fileID: 3296838077822371355, guid: 47f26fa60649e4b4798df2c519d3a1be, type: 3}
 --- !u!4 &755593954
 Transform:

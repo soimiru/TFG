@@ -4,25 +4,29 @@ using UnityEngine;
 
 public class GamePiece : MonoBehaviour
 {
-    private int x;
-    private int y;
+    [SerializeField]
+    private int xX;
+    [SerializeField]
+    private int yY;
 
     public int X {
-        get { return x; }
+        get { return xX; }
         set {
+            xX = value;
             if (IsMovable()) {
-                x = value;
+                xX = value;
             }
         }
     }
     public int Y
     {
-        get { return y; }
+        get { return yY; }
         set
         {
+            yY = value;
             if (IsMovable())
             {
-                y = value;
+                yY = value;
             }
         }
     }
@@ -68,8 +72,8 @@ public class GamePiece : MonoBehaviour
     }
 
     public void Init(int _x, int _y, GridManager _grid, GridManager.PieceType _type) {
-        x = _x;
-        y = _y;
+        xX = _x;
+        yY = _y;
         grid = _grid;
         type = _type;
     }
@@ -82,4 +86,21 @@ public class GamePiece : MonoBehaviour
     {
         return colorComponent != null;
     }
+
+
+    #region MOUSE EVENTS
+    private void OnMouseEnter()
+    {
+        grid.EnteredPiece(this);
+        
+    }
+    private void OnMouseDown()
+    {
+        grid.PressPiece(this);
+    }
+    private void OnMouseUp()
+    {
+        grid.ReleasePiece();
+    }
+    #endregion
 }
