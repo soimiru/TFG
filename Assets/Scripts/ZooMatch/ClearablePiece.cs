@@ -42,5 +42,6 @@ public class ClearablePiece : MonoBehaviour
 
         anim.Play(clearAnimation.name);
         yield return new WaitForSeconds(clearAnimation.length);
+        Destroy(gameObject);
     }
 }

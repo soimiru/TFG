@@ -227,6 +227,7 @@ public class GridManager : MonoBehaviour
                 piece2.MovableComponent.Move(p1X, p1Y, fillTime);
 
                 ClearAllValidMatches();
+
             }
             else {
                 pieces[piece1.X, piece1.Y] = piece1;
@@ -267,7 +268,7 @@ public class GridManager : MonoBehaviour
         {
             pieces[x, y].ClearComponent.ClearPiece();
 
-            SpawnNewPiece(0, y, PieceType.EMPTY);
+            SpawnNewPiece(x, y, PieceType.EMPTY);
             return true;
         }
         else {
