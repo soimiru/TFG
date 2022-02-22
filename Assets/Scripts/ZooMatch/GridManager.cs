@@ -252,8 +252,10 @@ public class GridManager : MonoBehaviour
         }
     }
 
-    public List<GamePiece> GetMatch(GamePiece piece, int newX, int newY) {
-        if (piece.IsColored()) {
+    public List<GamePiece> GetMatch(GamePiece piece, int newX, int newY)
+    {
+        if (piece.IsColored())
+        {
             ColorPiece.ColorType color = piece.ColorComponent.Color;
             List<GamePiece> horizontalPieces = new List<GamePiece>();
             List<GamePiece> verticalPieces = new List<GamePiece>();
@@ -270,10 +272,12 @@ public class GridManager : MonoBehaviour
                     {
                         x = newX - xOff;
                     }
-                    else {  //DERECHA
+                    else
+                    {  //DERECHA
                         x = newX + xOff;
                     }
-                    if (x < 0 || x >= xDim) {   //LIMITES
+                    if (x < 0 || x >= xDim)
+                    {   //LIMITES
                         break;
                     }
 
@@ -281,24 +285,80 @@ public class GridManager : MonoBehaviour
                     {
                         horizontalPieces.Add(pieces[x, newY]);
                     }
-                    else {
+                    else
+                    {
                         break;
                     }
 
                 }
             }
 
-
-            if (horizontalPieces.Count >= 3){
+            //Añadimos al array de matching si hay más de 3 piezas iguales. 
+            if (horizontalPieces.Count >= 3)
+            {
                 for (int i = 0; i < horizontalPieces.Count; i++)
                 {
                     matchingPieces.Add(horizontalPieces[i]);
                 }
             }
 
-            if (matchingPieces.Count >= 3) {
+            
+            //Comprobamos combinaciones en forma de L
+            if (horizontalPieces.Count >= 3)
+            {
+                for (int i = 0; i < horizontalPieces.Count; i++)
+                {
+                    for (int direction = 0; direction <= 1; direction++) {
+                        for (int yOff = 1; yOff < xDim; yOff++) {
+                            int y;
+                            if (direction == 0)
+                            {   //ARRIBA
+                                y = newY - yOff;
+                            }
+                            else {  //ABAJO
+                                y = newY + yOff;
+                            }
+                            if (y < 0 || y >= yDim) {   //LIMITES
+                                break;
+                            }
+
+                            //Comprobar que los colores coinciden
+                            if (pieces[horizontalPieces[i].X, y].IsColored() && pieces[horizontalPieces[i].X, y].ColorComponent.Color == color)
+                            {
+                                verticalPieces.Add(pieces[horizontalPieces[i].X, y]);
+                            }
+                            else {
+                                break;
+                            }
+                        }
+                    }
+
+                    //Si no hay suficientes piezas, limpiamos el array
+                    if (verticalPieces.Count < 2)
+                    {
+                        verticalPieces.Clear();
+                    }
+                    //Si hay suficientes, las añadimos al array de "matching"
+                    else {
+                        for (int j = 0; j < verticalPieces.Count; j++)
+                        {
+                            matchingPieces.Add(verticalPieces[j]);
+                        }
+                        break;
+                    }
+                }
+            }
+
+            //Devuelve el array de matching
+            if (matchingPieces.Count >= 3)
+            {
                 return matchingPieces;
             }
+
+            //RESET
+            verticalPieces.Clear();
+            horizontalPieces.Clear();
+
 
             //VERTICAL
             verticalPieces.Add(piece);
@@ -332,7 +392,7 @@ public class GridManager : MonoBehaviour
                 }
             }
 
-
+            //Añadimos al array de matching si hay más de 3 piezas iguales. 
             if (verticalPieces.Count >= 3)
             {
                 for (int i = 0; i < verticalPieces.Count; i++)
@@ -340,7 +400,60 @@ public class GridManager : MonoBehaviour
                     matchingPieces.Add(verticalPieces[i]);
                 }
             }
+            
+            //Comprobamos las combinaciones en forma de L
+            if (verticalPieces.Count >= 3)
+            {
+                for (int i = 0; i < verticalPieces.Count; i++)
+                {
+                    for (int direction = 0; direction <= 1; direction++)
+                    {
+                        for (int xOff = 1; xOff < xDim; xOff++)
+                        {
+                            int x;
+                            if (direction == 0)
+                            {   //IZQUIERDA
+                                x = newX - xOff;
+                            }
+                            else
+                            {  //DERECHA
+                                x = newX + xOff;
+                            }
+                            if (x < 0 || x >= xDim)
+                            {   //LIMITES
+                                break;
+                            }
 
+                            //Comprobar que los colores coinciden
+                            if (pieces[x, verticalPieces[i].Y].IsColored() && pieces[x, verticalPieces[i].Y].ColorComponent.Color == color)
+                            {
+                                verticalPieces.Add(pieces[x, verticalPieces[i].Y]);
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                    }
+
+                    //Si no hay suficientes piezas, limpiamos el array
+                    if (horizontalPieces.Count < 2)
+                    {
+                        horizontalPieces.Clear();
+                    }
+                    //Si hay suficientes, las añadimos al array de "matching"
+                    else
+                    {
+                        for (int j = 0; j < horizontalPieces.Count; j++)
+                        {
+                            matchingPieces.Add(horizontalPieces[j]);
+                        }
+                        break;
+                    }
+                }
+            }
+
+            //Devolvemos el array
             if (matchingPieces.Count >= 3)
             {
                 return matchingPieces;
@@ -349,5 +462,5 @@ public class GridManager : MonoBehaviour
 
         }
         return null;
-    } 
+    }
 }
