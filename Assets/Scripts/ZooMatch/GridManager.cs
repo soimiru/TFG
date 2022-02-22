@@ -225,6 +225,8 @@ public class GridManager : MonoBehaviour
                 int p1Y = piece1.Y;
                 piece1.MovableComponent.Move(piece2.X, piece2.Y, fillTime);
                 piece2.MovableComponent.Move(p1X, p1Y, fillTime);
+
+                ClearAllValidMatches();
             }
             else {
                 pieces[piece1.X, piece1.Y] = piece1;
@@ -234,6 +236,46 @@ public class GridManager : MonoBehaviour
             
         }
     }
+
+    public bool ClearAllValidMatches()
+    {
+        bool needsRefill = false;
+        for (int x = 0; x < xDim; x++)
+        {
+            for (int y = 0; y < yDim; y++)
+            {
+                if (pieces[x, y].IsClearable()) {
+                    List<GamePiece> match = GetMatch(pieces[x, y], x, y);
+
+                    if (match != null) {
+                        for (int i = 0; i < match.Count; i++) {
+                            if (ClearGridPiece(match[i].X, match[i].Y)) {
+                                needsRefill = true;
+                            }
+                        }
+                    }
+                }
+            
+            }
+        }
+
+        return needsRefill;
+    }
+
+    public bool ClearGridPiece(int x, int y) {
+        if (pieces[x, y].IsClearable() && !pieces[x, y].ClearComponent.IsBeingCleared)
+        {
+            pieces[x, y].ClearComponent.ClearPiece();
+
+            SpawnNewPiece(0, y, PieceType.EMPTY);
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    #region PRESS-ENTERED-RELEASE LOGIC
 
     public void PressPiece(GamePiece piece) {
         pressedPiece = piece;
@@ -251,7 +293,9 @@ public class GridManager : MonoBehaviour
             SwapPieces(pressedPiece, enteredPiece);
         }
     }
+    #endregion
 
+    #region MATCH LOGIC
     public List<GamePiece> GetMatch(GamePiece piece, int newX, int newY)
     {
         if (piece.IsColored())
@@ -463,4 +507,5 @@ public class GridManager : MonoBehaviour
         }
         return null;
     }
+    #endregion
 }

@@ -54,10 +54,17 @@ public class GamePiece : MonoBehaviour
         get { return colorComponent; }
     }
 
+    private ClearablePiece clearComponent;
+    public ClearablePiece ClearComponent
+    {
+        get { return clearComponent; }
+    }
+
     private void Awake()
     {
         movableComponent = GetComponent<MovablePiece>();
         colorComponent = GetComponent<ColorPiece>();
+        clearComponent = GetComponent<ClearablePiece>();
     }
 
     void Start()
@@ -86,7 +93,9 @@ public class GamePiece : MonoBehaviour
     {
         return colorComponent != null;
     }
-
+    public bool IsClearable() {
+        return clearComponent != null;
+    }
 
     #region MOUSE EVENTS
     private void OnMouseEnter()
