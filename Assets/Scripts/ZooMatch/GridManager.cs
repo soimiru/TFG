@@ -98,11 +98,19 @@ public class GridManager : MonoBehaviour
 
     public IEnumerator Fill() {
 
-        while (FillStep()) {
-            inverse = !inverse;
+        bool needsRefill = true;
+        while (needsRefill) {
+
             yield return new WaitForSeconds(fillTime);
+
+            while (FillStep()) {
+                inverse = !inverse;
+                yield return new WaitForSeconds(fillTime);
+            }
+            needsRefill = ClearAllValidMatches();
         }
     }
+
     public bool FillStep() { 
         bool movedPiece = false;
         for (int y = yDim-2; y >= 0; y--)
@@ -226,15 +234,17 @@ public class GridManager : MonoBehaviour
                 piece1.MovableComponent.Move(piece2.X, piece2.Y, fillTime);
                 piece2.MovableComponent.Move(p1X, p1Y, fillTime);
 
-                ClearAllValidMatches();
+
+                if (ClearAllValidMatches()) { 
+                    StartCoroutine(Fill());
+                }
+                
 
             }
             else {
                 pieces[piece1.X, piece1.Y] = piece1;
                 pieces[piece2.X, piece2.Y] = piece2;
             }
-
-            
         }
     }
 
@@ -256,7 +266,6 @@ public class GridManager : MonoBehaviour
                         }
                     }
                 }
-            
             }
         }
 
@@ -307,7 +316,7 @@ public class GridManager : MonoBehaviour
             List<GamePiece> matchingPieces = new List<GamePiece>();
 
             //HORIZONTAL
-            horizontalPieces.Add(piece);
+            horizontalPieces.Add(piece);    //Añade la primera pieza al array
             for (int direction = 0; direction <= 1; direction++)
             {
                 for (int xOff = 1; xOff < xDim; xOff++)
@@ -347,23 +356,27 @@ public class GridManager : MonoBehaviour
                 }
             }
 
-            
+
             //Comprobamos combinaciones en forma de L
             if (horizontalPieces.Count >= 3)
             {
                 for (int i = 0; i < horizontalPieces.Count; i++)
                 {
-                    for (int direction = 0; direction <= 1; direction++) {
-                        for (int yOff = 1; yOff < xDim; yOff++) {
+                    for (int direction = 0; direction <= 1; direction++)
+                    {
+                        for (int yOff = 1; yOff < yDim; yOff++)
+                        {
                             int y;
                             if (direction == 0)
                             {   //ARRIBA
                                 y = newY - yOff;
                             }
-                            else {  //ABAJO
+                            else
+                            {  //ABAJO
                                 y = newY + yOff;
                             }
-                            if (y < 0 || y >= yDim) {   //LIMITES
+                            if (y < 0 || y >= yDim)
+                            {   //LIMITES
                                 break;
                             }
 
@@ -372,8 +385,9 @@ public class GridManager : MonoBehaviour
                             {
                                 verticalPieces.Add(pieces[horizontalPieces[i].X, y]);
                             }
-                            else {
-                                break;
+                            else
+                            {
+                                continue;
                             }
                         }
                     }
@@ -384,7 +398,8 @@ public class GridManager : MonoBehaviour
                         verticalPieces.Clear();
                     }
                     //Si hay suficientes, las añadimos al array de "matching"
-                    else {
+                    else
+                    {
                         for (int j = 0; j < verticalPieces.Count; j++)
                         {
                             matchingPieces.Add(verticalPieces[j]);
@@ -409,7 +424,7 @@ public class GridManager : MonoBehaviour
             verticalPieces.Add(piece);
             for (int direction = 0; direction <= 1; direction++)
             {
-                for (int yOff = 1; yOff < xDim; yOff++)
+                for (int yOff = 1; yOff < yDim; yOff++)
                 {
                     int y;
                     if (direction == 0) //ARRIBA
@@ -420,7 +435,7 @@ public class GridManager : MonoBehaviour
                     {  //ABAJO
                         y = newY + yOff;
                     }
-                    if (y < 0 || y >= xDim)
+                    if (y < 0 || y >= yDim)
                     {   //LIMITES
                         break;
                     }
@@ -445,7 +460,7 @@ public class GridManager : MonoBehaviour
                     matchingPieces.Add(verticalPieces[i]);
                 }
             }
-            
+
             //Comprobamos las combinaciones en forma de L
             if (verticalPieces.Count >= 3)
             {
@@ -472,11 +487,11 @@ public class GridManager : MonoBehaviour
                             //Comprobar que los colores coinciden
                             if (pieces[x, verticalPieces[i].Y].IsColored() && pieces[x, verticalPieces[i].Y].ColorComponent.Color == color)
                             {
-                                verticalPieces.Add(pieces[x, verticalPieces[i].Y]);
+                                horizontalPieces.Add(pieces[x, verticalPieces[i].Y]);
                             }
                             else
                             {
-                                break;
+                                continue;
                             }
                         }
                     }
