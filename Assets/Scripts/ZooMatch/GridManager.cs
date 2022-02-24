@@ -48,7 +48,71 @@ public class GridManager : MonoBehaviour
             for (int y = 0; y < yDim; y++)
             {
                 GameObject background = (GameObject)Instantiate(backgroundPrefab, GetWorldPosition(x, y), Quaternion.identity);
-                //background.transform.parent = transform;
+
+                //TOP
+                if (y == 0)
+                {
+                    //TOP LEFT
+                    if (x == 0)
+                    {
+                        background.GetComponent<TileBackground>().SetTile(TileBackground.TileType.TOPLEFT);
+                    }
+                    //TOP RIGHT
+                    else if (x == xDim - 1)
+                    {
+                        background.GetComponent<TileBackground>().SetTile(TileBackground.TileType.TOPRIGHT);
+                        
+                    }
+                    //TOP
+                    else
+                    {
+                        background.GetComponent<TileBackground>().SetTile(TileBackground.TileType.TOP);
+                    }
+                }
+                //BOTTOM
+                else if (y == yDim - 1)
+                {
+                    //BOTTOM LEFT
+                    if (x == 0)
+                    {
+                        background.GetComponent<TileBackground>().SetTile(TileBackground.TileType.BOTTOMLEFT);
+
+                    }
+                    //BOTTOM RIGHT
+                    else if (x == xDim - 1)
+                    {
+                        background.GetComponent<TileBackground>().SetTile(TileBackground.TileType.BOTTOMRIGHT);
+                    }
+                    //BOTTOM
+                    else
+                    {
+                        background.GetComponent<TileBackground>().SetTile(TileBackground.TileType.BOTTOM);
+                    }
+                }
+                //CENTER
+                else {
+                    if (x == 0) {
+                        background.GetComponent<TileBackground>().SetTile(TileBackground.TileType.LEFT);
+                    }
+                    else if (x == xDim-1) {
+                        background.GetComponent<TileBackground>().SetTile(TileBackground.TileType.RIGHT);
+                    }
+                    else{
+                        int rand = Random.Range(0, 2);
+                        if (rand == 0)
+                        {
+                            background.GetComponent<TileBackground>().SetTile(TileBackground.TileType.CENTER1);
+                        }
+                        else if (rand == 1)
+                        {
+                            background.GetComponent<TileBackground>().SetTile(TileBackground.TileType.CENTER2);
+                        }
+                        else {
+                            background.GetComponent<TileBackground>().SetTile(TileBackground.TileType.CENTER3);
+                        }
+                    }
+                }
+                background.name = "BG["+x+", "+y+"]";
                 background.transform.SetParent(transform, false);
             }
         }
@@ -80,11 +144,11 @@ public class GridManager : MonoBehaviour
 
         Destroy(pieces[4, 4].gameObject);
         SpawnNewPiece(4,4,PieceType.OBSTACLE);
-        Destroy(pieces[5, 4].gameObject);
-        SpawnNewPiece(5, 4, PieceType.OBSTACLE);
+        //Destroy(pieces[5, 4].gameObject);
+        //SpawnNewPiece(5, 4, PieceType.OBSTACLE);
 
-        Destroy(pieces[6, 4].gameObject);
-        SpawnNewPiece(6, 4, PieceType.OBSTACLE);
+        //Destroy(pieces[6, 4].gameObject);
+        //SpawnNewPiece(6, 4, PieceType.OBSTACLE);
 
         StartCoroutine(Fill());
 

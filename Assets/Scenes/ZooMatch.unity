@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae5d75b35ecfc62418e02d7714d7baec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xDim: 9
+  xDim: 3
   yDim: 9
   fillTime: 0.2
   piecePrefabs:
