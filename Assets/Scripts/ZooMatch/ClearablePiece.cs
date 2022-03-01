@@ -13,6 +13,10 @@ public class ClearablePiece : MonoBehaviour
     }
 
     private GamePiece piece;
+    public GamePiece Piece
+    {
+        get { return piece; }
+    }
 
     private void Awake()
     {
@@ -29,6 +33,12 @@ public class ClearablePiece : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public virtual void Clear()
+    {
+        isBeingCleared = true;
+        StartCoroutine(ClearCoroutine());
     }
 
     public void ClearPiece() {

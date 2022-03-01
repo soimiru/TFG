@@ -152,8 +152,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae5d75b35ecfc62418e02d7714d7baec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xDim: 3
-  yDim: 9
+  xDim: 9
+  yDim: 6
   fillTime: 0.2
   piecePrefabs:
   - type: 0
@@ -162,6 +162,10 @@ MonoBehaviour:
     prefab: {fileID: 5990487634178464516, guid: ee82da69cde66f14ba85d94c27fbe72a, type: 3}
   - type: 2
     prefab: {fileID: 5990487634178464516, guid: cdc924df557e14847aab6672a5d19ee7, type: 3}
+  - type: 3
+    prefab: {fileID: 5990487634178464516, guid: 8cc1758a2a9f23f4a8383087cca7b6f9, type: 3}
+  - type: 4
+    prefab: {fileID: 5990487634178464516, guid: a847844dbd24a5d45849f880cd165ee1, type: 3}
   backgroundPrefab: {fileID: 3296838077822371355, guid: 47f26fa60649e4b4798df2c519d3a1be, type: 3}
 --- !u!4 &755593954
 Transform:

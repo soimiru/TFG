@@ -8,6 +8,8 @@ public class GridManager : MonoBehaviour
         EMPTY,
         NORMAL, 
         OBSTACLE,
+        ROW_CLEAR,
+        COLUMN_CLEAR,
         COUNT,
     };
 
@@ -299,10 +301,24 @@ public class GridManager : MonoBehaviour
                 piece2.MovableComponent.Move(p1X, p1Y, fillTime);
 
 
-                if (ClearAllValidMatches()) { 
-                    StartCoroutine(Fill());
+                //if (ClearAllValidMatches()) { 
+                //    StartCoroutine(Fill());
+                //}
+
+                ClearAllValidMatches();
+
+                if (piece1.Type == PieceType.ROW_CLEAR || piece1.Type == PieceType.COLUMN_CLEAR) {
+                    ClearGridPiece(piece1.X, piece1.Y);
                 }
-                
+                else if (piece2.Type == PieceType.ROW_CLEAR || piece2.Type == PieceType.COLUMN_CLEAR)
+                {
+                    ClearGridPiece(piece2.X, piece2.Y);
+                }
+
+                pressedPiece = null;
+                enteredPiece = null;
+
+                StartCoroutine(Fill());
 
             }
             else {
@@ -323,11 +339,49 @@ public class GridManager : MonoBehaviour
                     List<GamePiece> match = GetMatch(pieces[x, y], x, y);
 
                     if (match != null) {
+                        //SpecialPieceType
+                        PieceType specialPieceType = PieceType.COUNT;
+                        GamePiece randomPiece = match[Random.Range(0, match.Count)];
+                        int specialPieceX = randomPiece.X;
+                        int specialPieceY = randomPiece.Y;
+
+                        if (match.Count == 4) {
+                            if (pressedPiece == null || enteredPiece == null)   //No se han hecho movimientos pero se ha generado una combinacion
+                            {
+                                specialPieceType = (PieceType)Random.Range((int)PieceType.ROW_CLEAR, (int)PieceType.COLUMN_CLEAR);
+                            }
+                            else if (pressedPiece.Y == enteredPiece.Y)  //Coinciden en el eje Y
+                            {
+                                specialPieceType = PieceType.ROW_CLEAR;
+                            }
+                            else {  //Coinciden en el eje X
+                                specialPieceType = PieceType.COLUMN_CLEAR;
+                            }
+                        }
+
                         for (int i = 0; i < match.Count; i++) {
                             if (ClearGridPiece(match[i].X, match[i].Y)) {
                                 needsRefill = true;
+
+                                if (match[i] == pressedPiece || match[i] == enteredPiece) {
+                                    specialPieceX = match[i].X;
+                                    specialPieceY = match[i].Y;
+                                }
                             }
                         }
+                        //Si specialPieceType no es el tipo base, se crea una nueva pieza especial donde corresponda.
+                        if (specialPieceType != PieceType.COUNT) {
+                            Destroy(pieces[specialPieceX, specialPieceY]);
+                            GamePiece newPiece = SpawnNewPiece(specialPieceX, specialPieceY, specialPieceType);
+
+                            //CAMBIAR
+                            if ((specialPieceType == PieceType.ROW_CLEAR || specialPieceType == PieceType.COLUMN_CLEAR) &&
+                                newPiece.IsColored() && match[0].IsColored()) {
+                                newPiece.ColorComponent.SetColor(match[0].ColorComponent.Color);
+                            }
+
+                        }
+
                     }
                 }
             }
@@ -346,6 +400,18 @@ public class GridManager : MonoBehaviour
         }
         else {
             return false;
+        }
+    }
+
+    public void ClearRow(int row) {
+        for (int x = 0; x < xDim; x++) {
+            ClearGridPiece(x, row);
+        }
+    }
+
+    public void ClearColumn(int col) {
+        for (int y = 0; y < yDim; y++) {
+            ClearGridPiece(col, y);
         }
     }
 
