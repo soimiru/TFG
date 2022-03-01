@@ -223,17 +223,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colorSprites:
   - color: 0
-    sprite: {fileID: 21300000, guid: aab9bc7a7d4f4ec4da251005e0e67de2, type: 3}
+    sprite: {fileID: 21300000, guid: 27020d98591b3a54492670332f262d4d, type: 3}
   - color: 1
-    sprite: {fileID: 21300000, guid: 26ce8c412f589ee4cadaf768979439b0, type: 3}
+    sprite: {fileID: 21300000, guid: d345e6fd02e3ab24d96172302a14f4b5, type: 3}
   - color: 2
-    sprite: {fileID: 21300000, guid: 327f032c3e1474a4aac56308310debd0, type: 3}
+    sprite: {fileID: 21300000, guid: 7e1f7019fceda764ca92e86f96d7c522, type: 3}
   - color: 3
-    sprite: {fileID: 21300000, guid: 8fa19dc178b2b0946a1b830dd8e9c8cb, type: 3}
+    sprite: {fileID: 21300000, guid: 5e7e30ebc119a1141a7c80e24bb0d7dd, type: 3}
   - color: 4
-    sprite: {fileID: 21300000, guid: 355552f490e63bd4cba57d671818b8d0, type: 3}
+    sprite: {fileID: 21300000, guid: 262bd39188212dd478b03d4ee293e7d5, type: 3}
   - color: 5
-    sprite: {fileID: 21300000, guid: d127c1e8ff5aa954cb964a0c70738cb7, type: 3}
+    sprite: {fileID: 21300000, guid: da9bdf24abbec8041ae36a42d5868cb0, type: 3}
 --- !u!114 &6448026363884798809
 MonoBehaviour:
   m_ObjectHideFlags: 0
