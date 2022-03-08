@@ -540,10 +540,10 @@ public class GridManager : MonoBehaviour
             }
 
             //Devuelve el array de matching
-            if (matchingPieces.Count >= 3)
-            {
-                return matchingPieces;
-            }
+            //if (matchingPieces.Count >= 3)
+            //{
+            //    return matchingPieces;
+            //}
 
             //RESET
             verticalPieces.Clear();
