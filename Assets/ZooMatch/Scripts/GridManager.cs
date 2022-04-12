@@ -344,6 +344,7 @@ public class GridManager : MonoBehaviour
                         GamePiece randomPiece = match[Random.Range(0, match.Count)];
                         int specialPieceX = randomPiece.X;
                         int specialPieceY = randomPiece.Y;
+                        Debug.Log(match.Count);
 
                         if (match.Count == 4) {
                             if (pressedPiece == null || enteredPiece == null)   //No se han hecho movimientos pero se ha generado una combinacion
@@ -354,7 +355,8 @@ public class GridManager : MonoBehaviour
                             {
                                 specialPieceType = PieceType.ROW_CLEAR;
                             }
-                            else {  //Coinciden en el eje X
+                            else if (pressedPiece.X == enteredPiece.X)
+                            {  //Coinciden en el eje X
                                 specialPieceType = PieceType.COLUMN_CLEAR;
                             }
                         }
@@ -405,13 +407,19 @@ public class GridManager : MonoBehaviour
 
     public void ClearRow(int row) {
         for (int x = 0; x < xDim; x++) {
-            ClearGridPiece(x, row);
+            if (pieces[x, row].Type != PieceType.OBSTACLE)
+            {
+                ClearGridPiece(x, row);
+            }
         }
     }
 
     public void ClearColumn(int col) {
         for (int y = 0; y < yDim; y++) {
-            ClearGridPiece(col, y);
+            if (pieces[col, y].Type != PieceType.OBSTACLE) { 
+                ClearGridPiece(col, y);
+            }
+            
         }
     }
 
@@ -540,10 +548,10 @@ public class GridManager : MonoBehaviour
             }
 
             //Devuelve el array de matching
-            //if (matchingPieces.Count >= 3)
-            //{
-            //    return matchingPieces;
-            //}
+            if (matchingPieces.Count >= 3)
+            {
+                return matchingPieces;
+            }
 
             //RESET
             verticalPieces.Clear();
@@ -648,7 +656,6 @@ public class GridManager : MonoBehaviour
             {
                 return matchingPieces;
             }
-
 
         }
         return null;
