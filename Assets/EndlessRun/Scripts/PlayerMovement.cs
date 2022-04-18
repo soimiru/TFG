@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
 
     private bool IsGrounded() {
         //Returns True when in air - False when grounded
-        Debug.Log(Physics.BoxCast(collider.bounds.center, collider.bounds.size, Vector3.down * .1f, Quaternion.identity, 1f, platformLayerMask));
-        return Physics.BoxCast(collider.bounds.center, collider.bounds.size, Vector3.down * .1f, Quaternion.identity, 1f, platformLayerMask);
+        //Debug.Log(Physics.BoxCast(collider.bounds.center, collider.bounds.size, Vector3.down * .1f, Quaternion.identity, 1f, platformLayerMask));
+        return Physics.BoxCast(collider.bounds.center, collider.bounds.size, Vector3.down, Quaternion.identity, 0.5f, platformLayerMask);
     }
 }
