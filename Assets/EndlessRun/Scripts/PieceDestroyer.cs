@@ -11,7 +11,7 @@ public class PieceDestroyer : MonoBehaviour
     }
     private void Update()
     {
-        if (Vector3.Distance(player.transform.position, this.transform.position) > 30f) {
+        if (Vector3.Distance(player.transform.position, this.transform.position) > 100f) {
             Destroy(this.gameObject);
         }
     }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LevelGenerator : MonoBehaviour
 {
-    private const float PLAYER_DISTANCE_SPAWN_LEVEL_PIECE = 20f;
+    private const float PLAYER_DISTANCE_SPAWN_LEVEL_PIECE = 50f;
 
     [SerializeField] private Transform starterPiece;
     [SerializeField] private List<Transform> levelPieces;
@@ -16,7 +16,7 @@ public class LevelGenerator : MonoBehaviour
     {
         lastEndPosition = starterPiece.Find("EndPosition").position;
         
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 5; i++)
         {
             SpawnLevelPiece();
         }
