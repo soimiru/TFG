@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
             Jump();
         }
         //rigidbody.velocity = new Vector3(1f, rigidbody.velocity.y);
-        this.transform.position += Vector3.right * 0.02f;
+        this.transform.position += Vector3.right * 0.02f * Time.timeScale;
     }
 
     void Jump(){
