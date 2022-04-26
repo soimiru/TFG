@@ -1,7 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+//Piece movement logic
 public class MovablePiece : MonoBehaviour
 {
     private GamePiece piece;
@@ -12,23 +12,11 @@ public class MovablePiece : MonoBehaviour
         piece = GetComponent<GamePiece>();
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
+    //Move the piece to a new position
     public void Move(int newX, int newY, float time) {
         /*
-         * piece.X = newY;
+        piece.X = newY;
         piece.Y = newY;
-        
 
         piece.transform.localPosition = piece.GridRef.GetWorldPosition(newX, newY);*/
 
@@ -39,6 +27,7 @@ public class MovablePiece : MonoBehaviour
         StartCoroutine(moveCoroutine);
     }
 
+    //Makes the piece movement smooth
     private IEnumerator MoveCoroutine(int newX, int newY, float time) {
 
         this.name = "Piece [" + newX + ", " + newY + "]";

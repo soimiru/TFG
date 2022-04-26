@@ -1,7 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Color logic
 public class ColorPiece : MonoBehaviour
 {
     public enum ColorType { 
@@ -49,18 +49,6 @@ public class ColorPiece : MonoBehaviour
                 colorSpriteDICT.Add(colorSprites[i].color, colorSprites[i].sprite);
             }
         }
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void SetColor(ColorType newColor) {

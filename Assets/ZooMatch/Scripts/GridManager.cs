@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//All the grid logic. Clearing Pieces
 public class GridManager : MonoBehaviour
 {
     public enum PieceType { 
@@ -154,12 +155,6 @@ public class GridManager : MonoBehaviour
 
         StartCoroutine(Fill());
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public IEnumerator Fill() {
@@ -486,18 +481,23 @@ public class GridManager : MonoBehaviour
             }
 
             //Añadimos al array de matching si hay más de 3 piezas iguales. 
+            //if (horizontalPieces.Count >= 3)
+            //{
+            //    for (int i = 0; i < horizontalPieces.Count; i++)
+            //    {
+            //        matchingPieces.Add(horizontalPieces[i]);
+            //    }
+            //}
+
+
+            //Comprobamos combinaciones en forma de L
             if (horizontalPieces.Count >= 3)
             {
                 for (int i = 0; i < horizontalPieces.Count; i++)
                 {
                     matchingPieces.Add(horizontalPieces[i]);
                 }
-            }
 
-
-            //Comprobamos combinaciones en forma de L
-            if (horizontalPieces.Count >= 3)
-            {
                 for (int i = 0; i < horizontalPieces.Count; i++)
                 {
                     for (int direction = 0; direction <= 1; direction++)
@@ -591,17 +591,21 @@ public class GridManager : MonoBehaviour
             }
 
             //Añadimos al array de matching si hay más de 3 piezas iguales. 
+            //if (verticalPieces.Count >= 3)
+            //{
+            //    for (int i = 0; i < verticalPieces.Count; i++)
+            //    {
+            //        matchingPieces.Add(verticalPieces[i]);
+            //    }
+            //}
+
+            //Comprobamos las combinaciones en forma de L
             if (verticalPieces.Count >= 3)
             {
                 for (int i = 0; i < verticalPieces.Count; i++)
                 {
                     matchingPieces.Add(verticalPieces[i]);
                 }
-            }
-
-            //Comprobamos las combinaciones en forma de L
-            if (verticalPieces.Count >= 3)
-            {
                 for (int i = 0; i < verticalPieces.Count; i++)
                 {
                     for (int direction = 0; direction <= 1; direction++)

@@ -1,7 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//Generates Background tiles
 public class TileBackground : MonoBehaviour
 {
     public enum TileType
@@ -57,19 +58,6 @@ public class TileBackground : MonoBehaviour
                 tilesDICT.Add(tileSprites[i].tile, tileSprites[i].sprite);
             }
         }
-    }
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void SetTile(TileType newTile)

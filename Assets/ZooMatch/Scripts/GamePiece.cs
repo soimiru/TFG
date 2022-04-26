@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//GamePiece class, has all the Piece components
+//Also contais Mouse events that comunicates with GridManager
 public class GamePiece : MonoBehaviour
 {
     [SerializeField]
@@ -65,17 +67,6 @@ public class GamePiece : MonoBehaviour
         movableComponent = GetComponent<MovablePiece>();
         colorComponent = GetComponent<ColorPiece>();
         clearComponent = GetComponent<ClearablePiece>();
-    }
-
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void Init(int _x, int _y, GridManager _grid, GridManager.PieceType _type) {
