@@ -28,6 +28,7 @@ public class SGUIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 1f;
         pointsPositions[1].color = colorTransparent;
         pointsPositions[2].color = colorTransparent;
@@ -38,7 +39,7 @@ public class SGUIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) {
+        if (Input.GetKeyDown(KeyCode.P)) {
             PauseGame();
         }
     }
@@ -46,16 +47,17 @@ public class SGUIManager : MonoBehaviour
     public void PauseGame() {
         if (paused)
         {
-            Time.timeScale = 1f;
             anim.SetTrigger("P_OUT");
-            paused = false;
+            Time.timeScale = 1f;
+            Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
+            paused = false;
         }
         else {
-            Time.timeScale = 0f;
             anim.SetTrigger("P_IN");
-            paused = true;
+            Time.timeScale = 0f;
             Cursor.lockState = CursorLockMode.None;
+            paused = true;
         }
     }
 

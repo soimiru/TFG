@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 96e1301cb16e6924fb7076ee76bd0cb8
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Sniglet
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: b510ece0d9e430442bcbea1a4d3657f4, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
