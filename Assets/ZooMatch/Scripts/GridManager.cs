@@ -463,10 +463,13 @@ public class GridManager : MonoBehaviour
             List<GamePiece> horizontalPieces = new List<GamePiece>();
             List<GamePiece> verticalPieces = new List<GamePiece>();
             List<GamePiece> matchingPieces = new List<GamePiece>();
+
+            bool flag = false;
             //HORIZONTAL
             horizontalPieces.Add(piece);    //Añade la primera pieza al array
             for (int direction = 0; direction <= 1; direction++)
             {
+                flag = false;
                 for (int xOff = 1; xOff < xDim; xOff++)
                 {
                     int x;
@@ -489,9 +492,13 @@ public class GridManager : MonoBehaviour
                     }
                     else
                     {
+                        flag = true;
                         break;
                     }
 
+                }
+                if (flag) {
+                    continue;
                 }
             }
 
@@ -517,6 +524,7 @@ public class GridManager : MonoBehaviour
                 {
                     for (int direction = 0; direction <= 1; direction++)
                     {
+                        flag = false;
                         for (int yOff = 1; yOff < yDim; yOff++)
                         {
                             int y;
@@ -540,8 +548,13 @@ public class GridManager : MonoBehaviour
                             }
                             else
                             {
-                                continue;
+                                flag = true;
+                                break;
                             }
+                        }
+                        if (flag)
+                        {
+                            continue;
                         }
                     }
 
@@ -577,6 +590,7 @@ public class GridManager : MonoBehaviour
             verticalPieces.Add(piece);
             for (int direction = 0; direction <= 1; direction++)
             {
+                flag = false;
                 for (int yOff = 1; yOff < yDim; yOff++)
                 {
                     int y;
@@ -599,10 +613,15 @@ public class GridManager : MonoBehaviour
                     }
                     else
                     {
+                        flag = true;
                         break;
                     }
 
                 }
+                if (flag) {
+                    continue;
+                }
+
             }
 
             //Añadimos al array de matching si hay más de 3 piezas iguales. 
@@ -625,6 +644,7 @@ public class GridManager : MonoBehaviour
                 {
                     for (int direction = 0; direction <= 1; direction++)
                     {
+                        flag = false;
                         for (int xOff = 1; xOff < xDim; xOff++)
                         {
                             int x;
@@ -648,8 +668,13 @@ public class GridManager : MonoBehaviour
                             }
                             else
                             {
-                                continue;
+                                flag = true;
+                                break;
                             }
+                        }
+                        if (flag)
+                        {
+                            continue;
                         }
                     }
 
