@@ -209,8 +209,8 @@ MonoBehaviour:
   - tile: 7
     sprite: {fileID: 21300000, guid: ed62efd16e52b7943aa13a43e3662123, type: 3}
   - tile: 8
-    sprite: {fileID: 21300000, guid: dcf5b815678f54446959464d35240f4f, type: 3}
+    sprite: {fileID: 21300000, guid: 90ddb8b231560ac4f8b719417c1a2fb7, type: 3}
   - tile: 9
-    sprite: {fileID: 21300000, guid: b6b6f90e38b096842a0c0aed50ecbe33, type: 3}
+    sprite: {fileID: 21300000, guid: 3f4ea2072bdf28c46a49e9de09ff4082, type: 3}
   - tile: 10
-    sprite: {fileID: 21300000, guid: d5ceb54537e664949b8bf3d91400e3bc, type: 3}
+    sprite: {fileID: 21300000, guid: 804b94489b23bbb4da501234a73eec73, type: 3}

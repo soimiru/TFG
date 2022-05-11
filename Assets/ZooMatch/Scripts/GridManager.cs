@@ -52,6 +52,7 @@ public class GridManager : MonoBehaviour
             {
                 GameObject background = (GameObject)Instantiate(backgroundPrefab, GetWorldPosition(x, y), Quaternion.identity);
 
+                /*
                 //TOP
                 if (y == 0)
                 {
@@ -115,6 +116,21 @@ public class GridManager : MonoBehaviour
                         }
                     }
                 }
+                */
+                int rand = Random.Range(0, 2);
+                if (rand == 0)
+                {
+                    background.GetComponent<TileBackground>().SetTile(TileBackground.TileType.CENTER1);
+                }
+                else if (rand == 1)
+                {
+                    background.GetComponent<TileBackground>().SetTile(TileBackground.TileType.CENTER2);
+                }
+                else
+                {
+                    background.GetComponent<TileBackground>().SetTile(TileBackground.TileType.CENTER3);
+                }
+
                 background.name = "BG["+x+", "+y+"]";
                 background.transform.SetParent(transform, false);
             }
@@ -447,7 +463,6 @@ public class GridManager : MonoBehaviour
             List<GamePiece> horizontalPieces = new List<GamePiece>();
             List<GamePiece> verticalPieces = new List<GamePiece>();
             List<GamePiece> matchingPieces = new List<GamePiece>();
-
             //HORIZONTAL
             horizontalPieces.Add(piece);    //Añade la primera pieza al array
             for (int direction = 0; direction <= 1; direction++)
