@@ -7,17 +7,19 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask platformLayerMask;
     private Rigidbody rigidbody;
     private float jumpForce;
+    private float movementSpeed;
     private SphereCollider collider;
 
     private void Awake()
     {
-        rigidbody = transform.GetComponent<Rigidbody>();
-        collider = transform.GetComponent<SphereCollider>();
+        rigidbody = GetComponent<Rigidbody>();
+        collider = GetComponent<SphereCollider>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        movementSpeed = 5f;
         jumpForce = 6f;
     }
 
@@ -28,8 +30,10 @@ public class PlayerMovement : MonoBehaviour
             Jump();
         }
         //rigidbody.velocity = new Vector3(1f, rigidbody.velocity.y);
-        this.transform.position += Vector3.right * 0.02f * Time.timeScale;
+        rigidbody.velocity = new Vector2(movementSpeed, rigidbody.velocity.y);
+        //this.transform.position += Vector3.right * movementSpeed * Time.timeScale;
     }
+    
 
     void Jump(){
         rigidbody.velocity = Vector3.up * jumpForce;
