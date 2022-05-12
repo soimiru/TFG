@@ -20,6 +20,8 @@ public class GridManager : MonoBehaviour
         public GameObject prefab;
     };
 
+    [SerializeField] private ZMUIManager uiManager;
+
     public int xDim;
     public int yDim;
     public float fillTime;
@@ -355,7 +357,9 @@ public class GridManager : MonoBehaviour
                         GamePiece randomPiece = match[Random.Range(0, match.Count)];
                         int specialPieceX = randomPiece.X;
                         int specialPieceY = randomPiece.Y;
-                        Debug.Log(match.Count);
+
+                        //Add Points
+                        uiManager.AddPoints(match.Count);
 
                         if (match.Count == 4) {
                             if (pressedPiece == null || enteredPiece == null)   //No se han hecho movimientos pero se ha generado una combinacion

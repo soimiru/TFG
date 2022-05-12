@@ -2,9 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ZMUIManager : MonoBehaviour
 {
+    [SerializeField] private Text potionsText;
+    private int potionsNum;
+    [SerializeField] private Text pointsText;
+    private int points;
     private bool paused = false;
 
     private Animator anim;
@@ -16,6 +21,9 @@ public class ZMUIManager : MonoBehaviour
     void Start()
     {
         Time.timeScale = 1f;
+        potionsNum = 0;
+        points = 0;
+        AddPoints(0);
     }
 
     // Update is called once per frame
@@ -24,6 +32,16 @@ public class ZMUIManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.P))
         {
             PauseGame();
+        }
+    }
+
+    public void AddPoints(int numPieces) {
+        if (numPieces != 0) {
+            potionsNum++;
+            points += 10 * numPieces;
+            Debug.Log(points);
+            pointsText.text = points.ToString();
+            potionsText.text = "x"+potionsNum.ToString();
         }
     }
 
