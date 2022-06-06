@@ -32,10 +32,15 @@ public class PlayerMovement : MonoBehaviour
             Jump();
         }
         //rigidbody.velocity = new Vector3(1f, rigidbody.velocity.y);
-        rigidbody.velocity = new Vector2(movementSpeed, rigidbody.velocity.y);
+
         //this.transform.position += Vector3.right * movementSpeed * Time.timeScale;
     }
-    
+
+    private void FixedUpdate()
+    {
+        rigidbody.velocity = new Vector2(movementSpeed, rigidbody.velocity.y);
+    }
+
 
     void Jump(){
         characterAnimator.SetTrigger("Jumping");
@@ -46,7 +51,6 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator CheckIsGrounded() {
         bool onAir = true;
         while (onAir) {
-            Debug.Log("ON AIR " + onAir);
             if (IsGrounded()) {
                 onAir = false;
             }
