@@ -9,11 +9,13 @@ public class PlayerMovement : MonoBehaviour
     private float jumpForce;
     private float movementSpeed;
     private SphereCollider collider;
+    private Animator characterAnimator;
 
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
         collider = GetComponent<SphereCollider>();
+        characterAnimator = GetComponentInChildren<Animator>();
     }
 
     // Start is called before the first frame update
@@ -36,7 +38,21 @@ public class PlayerMovement : MonoBehaviour
     
 
     void Jump(){
+        characterAnimator.SetTrigger("Jumping");
         rigidbody.velocity = Vector3.up * jumpForce;
+        StartCoroutine(CheckIsGrounded());
+    }
+
+    IEnumerator CheckIsGrounded() {
+        bool onAir = true;
+        while (onAir) {
+            Debug.Log("ON AIR " + onAir);
+            if (IsGrounded()) {
+                onAir = false;
+            }
+            yield return new WaitForSeconds(1f);
+        }
+        characterAnimator.SetTrigger("Landing");
     }
 
     private bool IsGrounded() {
