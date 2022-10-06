@@ -2821,7 +2821,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: '*game name*'
+  m_Text: MinUX Games
 --- !u!222 &1787162968
 CanvasRenderer:
   m_ObjectHideFlags: 0
