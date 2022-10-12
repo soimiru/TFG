@@ -1,20 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private LayerMask platformLayerMask;
-    private Rigidbody rigidbody;
+    private Rigidbody myRigidbody;
     private float jumpForce;
     private float movementSpeed;
-    private SphereCollider collider;
+    private SphereCollider myCollider;
     private Animator characterAnimator;
+
+    public List<GameObject> lifeSprites;
+
+    public int lifes = 3;
 
     private void Awake()
     {
-        rigidbody = GetComponent<Rigidbody>();
-        collider = GetComponent<SphereCollider>();
+        myRigidbody = GetComponent<Rigidbody>();
+        myCollider = GetComponent<SphereCollider>();
         characterAnimator = GetComponentInChildren<Animator>();
     }
 
@@ -38,13 +43,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rigidbody.velocity = new Vector2(movementSpeed, rigidbody.velocity.y);
+        myRigidbody.velocity = new Vector2(movementSpeed, myRigidbody.velocity.y);
     }
 
 
     void Jump(){
         characterAnimator.SetTrigger("Jumping");
-        rigidbody.velocity = Vector3.up * jumpForce;
+        myRigidbody.velocity = Vector3.up * jumpForce;
         StartCoroutine(CheckIsGrounded());
     }
 
@@ -62,6 +67,29 @@ public class PlayerMovement : MonoBehaviour
     private bool IsGrounded() {
         //Returns True when in air - False when grounded
         //Debug.Log(Physics.BoxCast(collider.bounds.center, collider.bounds.size, Vector3.down * .1f, Quaternion.identity, 1f, platformLayerMask));
-        return Physics.BoxCast(collider.bounds.center, collider.bounds.size, Vector3.down, Quaternion.identity, 0.5f, platformLayerMask);
+        return Physics.BoxCast(myCollider.bounds.center, myCollider.bounds.size, Vector3.down, Quaternion.identity, 0.5f, platformLayerMask);
+    }
+
+    void OnTriggerEnter(Collider other) {
+        if (other.gameObject.name.Equals("DyingZone"))
+        {
+            Vector3 resetPosition = other.gameObject.transform.GetChild(0).gameObject.transform.position;
+            this.gameObject.transform.position = resetPosition;
+            ReduceLife();
+        }
+    }
+
+    private void ReduceLife() {
+        lifes--;
+        lifeSprites[lifes].GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.5f, 0.5f);
+        if (lifes == 0)
+        {
+            Die();
+        }
+    }
+
+
+    private void Die() {
+        Destroy(this.gameObject);
     }
 }
