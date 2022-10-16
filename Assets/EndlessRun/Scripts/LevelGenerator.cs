@@ -8,13 +8,16 @@ public class LevelGenerator : MonoBehaviour
 
     [SerializeField] private Transform starterPiece;
     [SerializeField] private List<Transform> levelPieces;
+    [SerializeField] private List<Transform> specialPieces;
     [SerializeField] private GameObject player;
 
     private Vector3 lastEndPosition;
+    private int pieceCount;
 
     private void Awake()
     {
         lastEndPosition = starterPiece.Find("EndPosition").position;
+        pieceCount = 0;
         
         for (int i = 0; i < 5; i++)
         {
@@ -31,13 +34,28 @@ public class LevelGenerator : MonoBehaviour
     void Update()
     {
         if (Vector3.Distance(player.transform.position, lastEndPosition) < PLAYER_DISTANCE_SPAWN_LEVEL_PIECE) {
-            SpawnLevelPiece();
+            if (pieceCount >= 2)
+            {
+                SpawnSpecialPiece();
+                pieceCount = 0;
+            }
+            else { 
+                SpawnLevelPiece();
+                pieceCount++;
+
+            }
         }
         
     }
 
     private void SpawnLevelPiece() {
         Transform chosenLevelPiece = levelPieces[Random.Range(0, levelPieces.Count)];
+        Transform lastLevelPieceTransform = SpawnLevelPiece(chosenLevelPiece, lastEndPosition);
+        lastEndPosition = lastLevelPieceTransform.Find("EndPosition").position;
+    }
+
+    private void SpawnSpecialPiece() {
+        Transform chosenLevelPiece = specialPieces[Random.Range(0, specialPieces.Count)];
         Transform lastLevelPieceTransform = SpawnLevelPiece(chosenLevelPiece, lastEndPosition);
         lastEndPosition = lastLevelPieceTransform.Find("EndPosition").position;
     }

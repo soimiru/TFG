@@ -16,6 +16,9 @@ public class PlayerMovement : MonoBehaviour
 
     public int lifes = 3;
 
+    private Color activeHeart = new Color(1f, 1f, 1f);
+    private Color deactivatedHeart = new Color(0.5f, 0.5f, 0.5f);
+
     private void Awake()
     {
         myRigidbody = GetComponent<Rigidbody>();
@@ -33,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded() ) {
+        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded()) {
             Jump();
         }
         //rigidbody.velocity = new Vector3(1f, rigidbody.velocity.y);
@@ -47,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    void Jump(){
+    void Jump() {
         characterAnimator.SetTrigger("Jumping");
         myRigidbody.velocity = Vector3.up * jumpForce;
         StartCoroutine(CheckIsGrounded());
@@ -77,16 +80,30 @@ public class PlayerMovement : MonoBehaviour
             this.gameObject.transform.position = resetPosition;
             ReduceLife();
         }
+        else if (other.gameObject.name.Equals("heart")) {
+            IncreaseLife(other.gameObject);
+        }
     }
 
     private void ReduceLife() {
         lifes--;
-        lifeSprites[lifes].GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.5f, 0.5f);
+        lifeSprites[lifes].GetComponent<SpriteRenderer>().color = deactivatedHeart;
         if (lifes == 0)
         {
             Die();
         }
     }
+
+    private void IncreaseLife(GameObject other) {
+        if (lifes < 3)
+        {
+            lifes++;
+            lifeSprites[lifes - 1].GetComponent<SpriteRenderer>().color = activeHeart;
+            Destroy(other);
+        }
+    } 
+
+
 
 
     private void Die() {

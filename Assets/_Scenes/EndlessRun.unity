@@ -423,6 +423,9 @@ MonoBehaviour:
   - {fileID: 2760878319985342691, guid: fb4f51290a8145447a48bf2c092d8b4a, type: 3}
   - {fileID: 3343471995232578787, guid: ae13567876c77894bacdc143501d5e53, type: 3}
   - {fileID: 3343471995232578787, guid: 0bf68838d64fe454981ec6c93124003a, type: 3}
+  specialPieces:
+  - {fileID: 4223773573481065809, guid: 551e1bde58e18b44aafd95dda59df2a6, type: 3}
+  - {fileID: 4223773573481065809, guid: 551e1bde58e18b44aafd95dda59df2a6, type: 3}
   player: {fileID: 1397126534}
 --- !u!4 &930808379
 Transform:
