@@ -13,6 +13,7 @@ public class SGUIManager : MonoBehaviour
     public List<Image> timePositions;
     public List<Image> pointsPositions;
 
+
     private Animator anim;
 
     Color colorTransparent = new Color(0f, 0f, 0f, 0f);
@@ -23,11 +24,14 @@ public class SGUIManager : MonoBehaviour
     private void Awake()
     {
         anim = GetComponent<Animator>();
+        Time.timeScale = 0f;
+
+        Cursor.lockState = CursorLockMode.None;
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void StartGame()
     {
+        anim.SetTrigger("GameIDLE");
         Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 1f;
         pointsPositions[1].color = colorTransparent;
@@ -72,7 +76,7 @@ public class SGUIManager : MonoBehaviour
         if (number == -1)
         {
             //TIMESUP
-            
+
             timePositions[0].color = colorTransparent;
             timePositions[1].color = colorTransparent;
             timePositions[3].color = colorTransparent;
@@ -81,17 +85,37 @@ public class SGUIManager : MonoBehaviour
             timePositions[2].sprite = timeImages[10];
             timePositions[2].rectTransform.sizeDelta = new Vector2(500f, 500f);
         }
-        else if (number >= 10)
+        else if (number < 10) {
+            timePositions[1].sprite = timeImages[0];
+            timePositions[3].sprite = timeImages[0];
+            timePositions[4].sprite = timeImages[number];
+        }
+        else if (number >= 10 && number < 60)
         {
             int decenas = number / 10;
             int unidades = number - (decenas * 10);
+
+            timePositions[1].sprite = timeImages[0];
             timePositions[3].sprite = timeImages[decenas];
             timePositions[4].sprite = timeImages[unidades];
 
         }
-        else {
-            timePositions[3].sprite = timeImages[0];
-            timePositions[4].sprite = timeImages[number];
+        //60-119
+        else if (number >= 60 && number < 120)
+        {
+            number -= 60;
+            int decenas = number / 10;
+            int unidades = number - (decenas * 10);
+            timePositions[1].sprite = timeImages[1];
+
+            timePositions[3].sprite = timeImages[decenas];
+            timePositions[4].sprite = timeImages[unidades];
+        }
+        //>119
+        else if (number >= 120)
+        {
+            timePositions[1].sprite = timeImages[2];
+
         }
     }
 

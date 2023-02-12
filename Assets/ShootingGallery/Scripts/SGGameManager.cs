@@ -13,9 +13,14 @@ public class SGGameManager : MonoBehaviour
     private SGUIManager uiMan;
     private bool gameOver = false;
     private int points = 0;
-    private int gameSeconds = 30;
+    private int gameSeconds;
     private float spawnTime = 1f;
     private int randomIndex, randomDuckId;
+
+    public Slider timeSlider;
+    public Toggle infiniteMode, timeMode;
+
+    public int mode;
 
     private void Awake()
     {
@@ -24,7 +29,8 @@ public class SGGameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartGame();
+        //ConfigureGame();
+        //StartGame();
     }
 
     // Update is called once per frame
@@ -32,10 +38,51 @@ public class SGGameManager : MonoBehaviour
     {
     }
 
+    public void ToggleCheck(bool active) {
+        if (infiniteMode.isOn) {
+            //timeMode.isOn = !timeMode.isOn;
+            timeMode.transform.Find("Checkmark").gameObject.SetActive(false);
+        }
+        else if (timeMode.isOn)
+        {
+            //infiniteMode.isOn = !infiniteMode.isOn;
+            infiniteMode.transform.Find("Checkmark").gameObject.SetActive(false);
+
+        }
+    }
+    public void CustomizeGame() {
+
+        //MODO INFINITO
+        if (infiniteMode.isOn)
+        {
+            mode = 0;
+            gameSeconds = 0;
+        }
+
+        //MODO TIEMPO
+        else if (timeMode.isOn)
+        {
+            mode = 1;
+            //Define el tiempo que durará la partida
+            gameSeconds = (int)(timeSlider.value * 30);
+
+        }
+        StartGame();
+    }
+
     public void StartGame() {
-        //timeText.text = "00:" + gameSeconds;
-        InvokeRepeating("Spawn", 0f, spawnTime);
-        InvokeRepeating("CountDown", 0f, 1f);
+        //MODO INFINITO
+        if (mode == 0)
+        {
+            InvokeRepeating("Spawn", 0f, spawnTime);
+            InvokeRepeating("CountUp", 0f, 1f);
+        }
+        //MODO TIEMPO
+        else if (mode == 1) {
+            InvokeRepeating("Spawn", 0f, spawnTime);
+            InvokeRepeating("CountDown", 0f, 1f);
+        }
+        uiMan.StartGame();
     }
 
     public void Spawn() {
@@ -71,7 +118,7 @@ public class SGGameManager : MonoBehaviour
         {
             uiMan.TimeManager(-1);
             gameOver = true;
-            CancelInvoke("Count");
+            CancelInvoke("CountDown");
         }
         else
         {
@@ -81,11 +128,23 @@ public class SGGameManager : MonoBehaviour
         
     }
 
+    public void CountUp() {
+        gameSeconds += 1;
+        uiMan.TimeManager(gameSeconds);
+    }
+
 
     public void AddPoints(int amount) 
     {
         points += amount;
         uiMan.PointsManager(points);
         //pointsText.text = "Points: " + points;
+    }
+
+    public void GameOver()
+    {
+        uiMan.TimeManager(-1);
+        gameOver = true;
+        CancelInvoke("CountUp");
     }
 }
