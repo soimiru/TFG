@@ -143,7 +143,7 @@ public class SGGameManager : MonoBehaviour
 
     public void GameOver()
     {
-        uiMan.TimeManager(-1);
+        uiMan.TimeManager(-2);
         gameOver = true;
         CancelInvoke("CountUp");
     }

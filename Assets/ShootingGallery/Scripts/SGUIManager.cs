@@ -12,6 +12,7 @@ public class SGUIManager : MonoBehaviour
     public List<Sprite> timeImages;
     public List<Image> timePositions;
     public List<Image> pointsPositions;
+    public GameObject timeSlider;
 
 
     private Animator anim;
@@ -69,6 +70,10 @@ public class SGUIManager : MonoBehaviour
         SceneManager.LoadScene(name);
     }
 
+    public void HideTimeSlider(bool active) {
+        timeSlider.SetActive(active);
+    }
+
     #region INGAME 
 
     public void TimeManager(int number) {
@@ -83,9 +88,19 @@ public class SGUIManager : MonoBehaviour
             timePositions[4].color = colorTransparent;
 
             timePositions[2].sprite = timeImages[10];
-            timePositions[2].rectTransform.sizeDelta = new Vector2(500f, 500f);
+            timePositions[2].rectTransform.sizeDelta = new Vector2(400f, 400f);
         }
-        else if (number < 10) {
+        else if (number == -2) {
+            timePositions[0].color = colorTransparent;
+            timePositions[1].color = colorTransparent;
+            timePositions[3].color = colorTransparent;
+            timePositions[4].color = colorTransparent;
+
+            timePositions[2].sprite = timeImages[11];
+            timePositions[2].rectTransform.sizeDelta = new Vector2(400f, 400f);
+        }
+        else if (number < 10)
+        {
             timePositions[1].sprite = timeImages[0];
             timePositions[3].sprite = timeImages[0];
             timePositions[4].sprite = timeImages[number];
