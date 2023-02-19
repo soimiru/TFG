@@ -14,6 +14,7 @@ public class SGUIManager : MonoBehaviour
     public List<Image> pointsPositions;
     public GameObject timeSlider;
 
+    public Text finalPointsText;
 
     private Animator anim;
 
@@ -21,6 +22,8 @@ public class SGUIManager : MonoBehaviour
     Color colorWhite = new Color(1f, 1f, 1f, 1f);
 
     int uni, dec, cen, mil, demill;
+
+    bool gameIsStarted = false;
 
     private void Awake()
     {
@@ -32,6 +35,7 @@ public class SGUIManager : MonoBehaviour
 
     public void StartGame()
     {
+        gameIsStarted = true;
         anim.SetTrigger("GameIDLE");
         Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 1f;
@@ -44,7 +48,7 @@ public class SGUIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P)) {
+        if (gameIsStarted && Input.GetKeyDown(KeyCode.P)) {
             PauseGame();
         }
     }
@@ -52,16 +56,17 @@ public class SGUIManager : MonoBehaviour
     public void PauseGame() {
         if (paused)
         {
+            Cursor.lockState = CursorLockMode.Locked;
             anim.SetTrigger("P_OUT");
             Time.timeScale = 1f;
             Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
             paused = false;
         }
         else {
+            Cursor.lockState = CursorLockMode.None;
             anim.SetTrigger("P_IN");
             Time.timeScale = 0f;
-            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             paused = true;
         }
     }
@@ -72,6 +77,20 @@ public class SGUIManager : MonoBehaviour
 
     public void HideTimeSlider(bool active) {
         timeSlider.SetActive(active);
+    }
+
+    private void GameOverTransition() {
+        Time.timeScale = 0f;
+        Cursor.lockState = CursorLockMode.None;
+        anim.SetTrigger("GameOver");
+        CancelInvoke();
+    }
+
+    public void GameOver(int points) {
+        gameIsStarted = false;
+        finalPointsText.text = points + " points.";
+        Invoke("GameOverTransition", 2f);
+
     }
 
     #region INGAME 

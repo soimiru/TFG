@@ -12,6 +12,8 @@ public class PlayerMovement : MonoBehaviour
     private SphereCollider myCollider;
     private Animator characterAnimator;
 
+    private UIManager uiManager;
+
     public List<GameObject> lifeSprites;
 
     public int lifes = 3;
@@ -21,6 +23,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
+        uiManager = FindObjectOfType<UIManager>();
+
         myRigidbody = GetComponent<Rigidbody>();
         myCollider = GetComponent<SphereCollider>();
         characterAnimator = GetComponentInChildren<Animator>();
@@ -103,10 +107,9 @@ public class PlayerMovement : MonoBehaviour
         }
     } 
 
-
-
-
     private void Die() {
-        Destroy(this.gameObject);
+        //Destroy(this.gameObject);
+        this.gameObject.SetActive(false);
+        uiManager.GameOver();
     }
 }

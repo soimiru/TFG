@@ -12,6 +12,8 @@ public class UIManager : MonoBehaviour
     public List<Image> timePositions;
     public List<Image> pointsPositions;
 
+    public Text finalPointsText;
+
     private Animator anim;
 
     Color colorTransparent = new Color(0f, 0f, 0f, 0f);
@@ -19,16 +21,21 @@ public class UIManager : MonoBehaviour
 
     int uni, dec, cen, mil, demill;
 
+    int points;
+
     private void Awake()
     {
         anim = GetComponent<Animator>();
+        Time.timeScale = 0f;
+
     }
 
     // Start is called before the first frame update
     void Start()
     {
         //Cursor.lockState = CursorLockMode.Locked;
-        Time.timeScale = 1f;
+        Time.timeScale = 0f;
+        points = 0;
         //pointsPositions[1].color = colorTransparent;
         //pointsPositions[2].color = colorTransparent;
         //pointsPositions[3].color = colorTransparent;
@@ -48,24 +55,52 @@ public class UIManager : MonoBehaviour
     {
         if (paused)
         {
+            Cursor.lockState = CursorLockMode.Locked;
             anim.SetTrigger("P_OUT");
-            //Cursor.visible = false;
-            //Cursor.lockState = CursorLockMode.Locked;
-            paused = false;
             Time.timeScale = 1f;
+            Cursor.visible = false;
+            paused = false;
         }
         else
         {
+            Cursor.lockState = CursorLockMode.None;
             anim.SetTrigger("P_IN");
-            //Cursor.lockState = CursorLockMode.None;
-            paused = true;
             Time.timeScale = 0f;
+            Cursor.visible = true;
+            paused = true;
         }
     }
 
     public void LoadSceneByName(string name)
     {
         SceneManager.LoadScene(name);
+    }
+
+    public void StartGame()
+    {
+        anim.SetTrigger("GameIDLE");
+        Cursor.lockState = CursorLockMode.Locked;
+        Time.timeScale = 1f;
+        pointsPositions[1].color = colorTransparent;
+        pointsPositions[2].color = colorTransparent;
+        pointsPositions[3].color = colorTransparent;
+        pointsPositions[4].color = colorTransparent;
+        InvokeRepeating("StartPoints", 1f, 0.2f);
+    }
+
+    public void StartPoints()
+    {
+        points += 1;
+        PointsManager(points);
+    }
+
+    public void GameOver() {
+        CancelInvoke();
+        finalPointsText.text = points + " points.";
+
+        Time.timeScale = 0f;
+        Cursor.lockState = CursorLockMode.None;
+        anim.SetTrigger("GameOver");
     }
 
     #region INGAME 

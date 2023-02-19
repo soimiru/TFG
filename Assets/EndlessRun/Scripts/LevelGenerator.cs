@@ -14,8 +14,11 @@ public class LevelGenerator : MonoBehaviour
     private Vector3 lastEndPosition;
     private int pieceCount;
 
+    public UIManager uiManager;
+
     private void Awake()
     {
+        uiManager = FindObjectOfType<UIManager>();
         lastEndPosition = starterPiece.Find("EndPosition").position;
         pieceCount = 0;
         
@@ -27,7 +30,6 @@ public class LevelGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -45,7 +47,10 @@ public class LevelGenerator : MonoBehaviour
 
             }
         }
-        
+    }
+
+    public void CustomizeGame() {
+        uiManager.StartGame();
     }
 
     private void SpawnLevelPiece() {
@@ -64,4 +69,5 @@ public class LevelGenerator : MonoBehaviour
         Transform pieceTransform = Instantiate(levelPart, position, Quaternion.identity);
         return pieceTransform;
     }
+
 }

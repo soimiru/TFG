@@ -146,5 +146,6 @@ public class SGGameManager : MonoBehaviour
         uiMan.TimeManager(-2);
         gameOver = true;
         CancelInvoke("CountUp");
+        uiMan.GameOver(points);
     }
 }
