@@ -2877,7 +2877,7 @@ MonoBehaviour:
   - {fileID: 1841214696}
   - {fileID: 1122109802}
   - {fileID: 880961949}
-  timeSlider: {fileID: 4528419971189471526}
+  timeSliderGO: {fileID: 4528419971189471526}
   finalPointsText: {fileID: 1703865789}
 --- !u!95 &817169622
 Animator:
@@ -7750,7 +7750,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 817169621}
         m_TargetAssemblyTypeName: SGUIManager, Assembly-CSharp
         m_MethodName: LoadSceneByName
         m_Mode: 5
@@ -8022,7 +8022,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 817169621}
         m_TargetAssemblyTypeName: SGUIManager, Assembly-CSharp
         m_MethodName: HideTimeSlider
         m_Mode: 6
@@ -8578,7 +8578,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 817169621}
         m_TargetAssemblyTypeName: SGUIManager, Assembly-CSharp
         m_MethodName: HideTimeSlider
         m_Mode: 6

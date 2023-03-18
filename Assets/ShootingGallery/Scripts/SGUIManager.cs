@@ -12,7 +12,8 @@ public class SGUIManager : MonoBehaviour
     public List<Sprite> timeImages;
     public List<Image> timePositions;
     public List<Image> pointsPositions;
-    public GameObject timeSlider;
+    public GameObject timeSliderGO;
+
 
     public Text finalPointsText;
 
@@ -75,8 +76,9 @@ public class SGUIManager : MonoBehaviour
         SceneManager.LoadScene(name);
     }
 
-    public void HideTimeSlider(bool active) {
-        timeSlider.SetActive(active);
+    public void HideTimeSlider(bool active)
+    {
+        timeSliderGO.SetActive(active);
     }
 
     private void GameOverTransition() {
@@ -89,7 +91,7 @@ public class SGUIManager : MonoBehaviour
     public void GameOver(int points) {
         gameIsStarted = false;
         finalPointsText.text = points + " points.";
-        Invoke("GameOverTransition", 2f);
+        Invoke("GameOverTransition", 3f);
 
     }
 

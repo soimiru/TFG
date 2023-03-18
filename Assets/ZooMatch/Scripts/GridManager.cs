@@ -38,7 +38,7 @@ public class GridManager : MonoBehaviour
     private GamePiece pressedPiece;
     private GamePiece enteredPiece;
 
-    void Start()
+    public void StartGame()
     {
         piecePrefabDict = new Dictionary<PieceType, GameObject>();
         for (int i = 0; i < piecePrefabs.Length; i++)
@@ -163,8 +163,8 @@ public class GridManager : MonoBehaviour
             }
         }
 
-        Destroy(pieces[4, 4].gameObject);
-        SpawnNewPiece(4,4,PieceType.OBSTACLE);
+        //Destroy(pieces[4, 4].gameObject);
+        //SpawnNewPiece(4,4,PieceType.OBSTACLE);
         //Destroy(pieces[5, 4].gameObject);
         //SpawnNewPiece(5, 4, PieceType.OBSTACLE);
 

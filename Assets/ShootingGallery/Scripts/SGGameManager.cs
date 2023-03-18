@@ -18,6 +18,7 @@ public class SGGameManager : MonoBehaviour
     private int randomIndex, randomDuckId;
 
     public Slider timeSlider;
+
     public Toggle infiniteMode, timeMode;
 
     public int mode;
@@ -50,6 +51,8 @@ public class SGGameManager : MonoBehaviour
 
         }
     }
+
+
     public void CustomizeGame() {
 
         //MODO INFINITO
@@ -116,9 +119,10 @@ public class SGGameManager : MonoBehaviour
     public void CountDown() {
         if (gameSeconds == 0)
         {
-            uiMan.TimeManager(-1);
+            //uiMan.TimeManager(-1);
             gameOver = true;
             CancelInvoke("CountDown");
+            GameOver();
         }
         else
         {
@@ -143,7 +147,16 @@ public class SGGameManager : MonoBehaviour
 
     public void GameOver()
     {
-        uiMan.TimeManager(-2);
+        //INFINITE
+        if (mode == 0)
+        {
+            uiMan.TimeManager(-2);
+        }
+        //TIME
+        else
+        {
+            uiMan.TimeManager(-1);
+        }
         gameOver = true;
         CancelInvoke("CountUp");
         uiMan.GameOver(points);
