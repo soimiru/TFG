@@ -1831,6 +1831,8 @@ MonoBehaviour:
   - {fileID: 2760878319985342691, guid: fb4f51290a8145447a48bf2c092d8b4a, type: 3}
   - {fileID: 3343471995232578787, guid: ae13567876c77894bacdc143501d5e53, type: 3}
   - {fileID: 3343471995232578787, guid: 0bf68838d64fe454981ec6c93124003a, type: 3}
+  - {fileID: 4223773573481065809, guid: 26335dcd35a94f543a478289918d9be5, type: 3}
+  - {fileID: 4223773573481065809, guid: 2713429b63ab3a14381ee15b4d5f552a, type: 3}
   specialPieces:
   - {fileID: 4223773573481065809, guid: 551e1bde58e18b44aafd95dda59df2a6, type: 3}
   - {fileID: 4223773573481065809, guid: 551e1bde58e18b44aafd95dda59df2a6, type: 3}
@@ -2806,7 +2808,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1397126534}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: c50c324c0f7347b46ba9551870910401, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
