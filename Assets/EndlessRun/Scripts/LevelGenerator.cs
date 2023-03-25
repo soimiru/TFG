@@ -16,6 +16,14 @@ public class LevelGenerator : MonoBehaviour
 
     public UIManager uiManager;
 
+    public enum GameMode
+    {
+        LIFESMODE,
+        ONEHITMODE
+    };
+
+    public GameMode gameMode;
+
     private void Awake()
     {
         uiManager = FindObjectOfType<UIManager>();
@@ -37,7 +45,7 @@ public class LevelGenerator : MonoBehaviour
     void Update()
     {
         if (Vector3.Distance(player.transform.position, lastEndPosition) < PLAYER_DISTANCE_SPAWN_LEVEL_PIECE) {
-            if (pieceCount >= 2)
+            if (gameMode == GameMode.LIFESMODE && pieceCount >= 2)
             {
                 SpawnSpecialPiece();
                 pieceCount = 0;
@@ -51,7 +59,15 @@ public class LevelGenerator : MonoBehaviour
     }
 
     public void CustomizeGame() {
-        uiManager.StartGame();
+        int mode = uiManager.StartGame();
+        if (mode == 1)
+        {
+            gameMode = GameMode.ONEHITMODE;
+        }
+        else if (mode == 3) {
+            gameMode = GameMode.LIFESMODE;
+        }
+        player.GetComponent<PlayerMovement>().SetInitialLifes(mode);
     }
 
     private void SpawnLevelPiece() {

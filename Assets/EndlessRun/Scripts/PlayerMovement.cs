@@ -53,6 +53,12 @@ public class PlayerMovement : MonoBehaviour
         myRigidbody.velocity = new Vector2(movementSpeed, myRigidbody.velocity.y);
     }
 
+    public void SetInitialLifes(int lifes) {
+        this.lifes = lifes;
+        if (lifes == 1) {
+            transform.Find("Life").gameObject.SetActive(false);
+        }
+    }
 
     void Jump() {
         characterAnimator.SetTrigger("Jumping");
@@ -91,11 +97,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void ReduceLife() {
         lifes--;
-        lifeSprites[lifes].GetComponent<SpriteRenderer>().color = deactivatedHeart;
         if (lifes == 0)
         {
             Die();
         }
+        lifeSprites[lifes].GetComponent<SpriteRenderer>().color = deactivatedHeart;
+
     }
 
     private void IncreaseLife(GameObject other) {

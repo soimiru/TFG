@@ -22,6 +22,9 @@ public class UIManager : MonoBehaviour
     int uni, dec, cen, mil, demill;
 
     int points;
+    int gamemode;
+
+    public Toggle lifesMode, onehitMode;
 
     private void Awake()
     {
@@ -76,8 +79,9 @@ public class UIManager : MonoBehaviour
         SceneManager.LoadScene(name);
     }
 
-    public void StartGame()
+    public int StartGame()
     {
+        
         anim.SetTrigger("GameIDLE");
         Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 1f;
@@ -86,6 +90,14 @@ public class UIManager : MonoBehaviour
         pointsPositions[3].color = colorTransparent;
         pointsPositions[4].color = colorTransparent;
         InvokeRepeating("StartPoints", 1f, 0.2f);
+        if (lifesMode.isOn)
+        {
+            return 3;
+        }
+        else 
+        {
+            return 1;
+        }
     }
 
     public void StartPoints()
