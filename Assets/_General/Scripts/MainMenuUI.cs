@@ -1,50 +1,49 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class MainMenuUI : MonoBehaviour
 {
-    [SerializeField] private Image ZooMatchImage;
-    [SerializeField] private Image EndlessRunnerImage;
-    [SerializeField] private Image ShootingGalleryImage;
-    [SerializeField] private Image SettingsImage;
+    [SerializeField] private Image potionMatchImage;
+    [SerializeField] private Image eternalJumpImage;
+    [SerializeField] private Image luckyDuckyImage;
+    [SerializeField] private Image settingsImage;
 
-    // Start is called before the first frame update
     void Start()
     {
         Cursor.lockState = CursorLockMode.None;
         Time.timeScale = 1f;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    /// <summary>
+    /// Cambia las escenas.
+    /// </summary>
+    /// <param name="scene">String que contiene el nombre de la escena.</param>
     public void ChargeGame(string scene)
     {
         SceneManager.LoadScene(scene);
     }
 
+    /// <summary>
+    /// Modifica el orden de los paneles de la interfaz para visualizar el que se haya seleccionado.
+    /// </summary>
+    /// <param name="idx">Índice que sirve para saber que panel se ha seleccionado.</param>
     public void ChangeImage(int idx) {
         switch (idx) {
             case 0:
-                ZooMatchImage.transform.SetSiblingIndex(3);
+                potionMatchImage.transform.SetSiblingIndex(3);
                 break;
             case 1:
-                EndlessRunnerImage.transform.SetSiblingIndex(3);
+                eternalJumpImage.transform.SetSiblingIndex(3);
                 break;
             case 2:
-                ShootingGalleryImage.transform.SetSiblingIndex(3);
+                luckyDuckyImage.transform.SetSiblingIndex(3);
                 break;
             case 3:
-                SettingsImage.transform.SetSiblingIndex(3);
+                settingsImage.transform.SetSiblingIndex(3);
                 break;
             default:
-                ZooMatchImage.transform.SetSiblingIndex(3);
+                potionMatchImage.transform.SetSiblingIndex(3);
                 break;
         }
     }

@@ -1258,10 +1258,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3332c0fe0b0c834fb0e3790f7df6e41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ZooMatchImage: {fileID: 1758097328}
-  EndlessRunnerImage: {fileID: 2015561139}
-  ShootingGalleryImage: {fileID: 703743585}
-  SettingsImage: {fileID: 1973716871}
+  potionMatchImage: {fileID: 1758097328}
+  eternalJumpImage: {fileID: 2015561139}
+  luckyDuckyImage: {fileID: 703743585}
+  settingsImage: {fileID: 1973716871}
 --- !u!1 &464569507
 GameObject:
   m_ObjectHideFlags: 0

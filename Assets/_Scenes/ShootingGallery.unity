@@ -2709,7 +2709,7 @@ MonoBehaviour:
   - {fileID: 1242999752}
   - {fileID: 1470618459}
   - {fileID: 717600889}
-  patitos:
+  duckies:
   - {fileID: 4941234426291987033, guid: 8653b9a3fb87e6547818afc558051563, type: 3}
   - {fileID: 4941234426291987033, guid: 5d5e9909e185c6344a1d235f45720e73, type: 3}
   - {fileID: 4941234426291987033, guid: ec1a35d1fbb485c49ae28ad387e577a6, type: 3}

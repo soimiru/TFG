@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MouseLook : MonoBehaviour
 {
-    public float mouseSensitivity = 100f;
+    public float mouseSensitivity = 150f;
     public Transform playerBody;
 
     float mouseX;
@@ -11,11 +11,9 @@ public class MouseLook : MonoBehaviour
     float xRotation = 0f;
     float yRotation = 0f;
 
-    void Start()
-    {
-        //Cursor.lockState = CursorLockMode.Locked;
-    }
-
+    /// <summary>
+    /// Manejo del ratón.
+    /// </summary>
     void Update()
     {
         mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;

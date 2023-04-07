@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,7 +8,6 @@ public class ImageCarousel : MonoBehaviour
     Image myImage;
     int currentImage;
 
-    // Start is called before the first frame update
     void Awake()
     {
         myImage = GetComponent<Image>();
@@ -20,10 +18,14 @@ public class ImageCarousel : MonoBehaviour
         currentImage = 0;
         myImage.sprite = images[currentImage];
 
+        //Se llama al metodo NextImage() después de 5 segundos y cada 5 segundos
         InvokeRepeating("NextImage", 5f, 5f);
-
     }
 
+    /// <summary>
+    /// Cambia a la siguiente imagen dentro del array de imágenes, se invoca mediante las flechas del menú.
+    /// Controla el primer y el último elemento del array para evitar excepciones.
+    /// </summary>
     public void NextImage() {
         CancelInvoke();
         if (currentImage + 1 >= images.Count)
@@ -38,6 +40,10 @@ public class ImageCarousel : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Cambia a la anterior imagen dentro del array de imágenes, se invoca mediante las flechas del menú.
+    /// Controla el primer y el último elemento del array para evitar excepciones.
+    /// </summary>
     public void PreviousImage() {
         CancelInvoke();
         if (currentImage - 1 < 0)

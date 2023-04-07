@@ -7,38 +7,32 @@ public class SGGameManager : MonoBehaviour
 {
 
     public List<Transform> spawnPoints;
-    public List<GameObject> patitos;
-    public Canvas mainCanvas;
+    public List<GameObject> duckies;
 
     private SGUIManager uiMan;
-    private bool gameOver = false;
-    private int points = 0;
-    private int gameSeconds;
-    private float spawnTime = 1f;
-    private int randomIndex, randomDuckId;
-
+    public Canvas mainCanvas;
     public Slider timeSlider;
-
     public Toggle infiniteMode, timeMode;
 
+    private bool gameOver = false;
+
     public int mode;
+    private int points = 0;
+    private int gameSeconds;
+    private int randomIndex, randomDuckId;
+
+    private float spawnTime = 1f;
+
 
     private void Awake()
     {
         uiMan = mainCanvas.GetComponent<SGUIManager>();
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        //ConfigureGame();
-        //StartGame();
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
+    /// <summary>
+    /// Comprueba el toogle que está activo.
+    /// </summary>
+    /// <param name="active"></param>
     public void ToggleCheck(bool active) {
         if (infiniteMode.isOn) {
             //timeMode.isOn = !timeMode.isOn;
@@ -52,7 +46,9 @@ public class SGGameManager : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// Customiza el juego con los parámetros seleccionados.
+    /// </summary>
     public void CustomizeGame() {
 
         //MODO INFINITO
@@ -73,6 +69,9 @@ public class SGGameManager : MonoBehaviour
         StartGame();
     }
 
+    /// <summary>
+    /// Comienza el juego.
+    /// </summary>
     public void StartGame() {
         //MODO INFINITO
         if (mode == 0)
@@ -88,6 +87,9 @@ public class SGGameManager : MonoBehaviour
         uiMan.StartGame();
     }
 
+    /// <summary>
+    /// Gestiona el spawn de patitos.
+    /// </summary>
     public void Spawn() {
         if (!gameOver) {
             randomIndex = Random.Range(0, spawnPoints.Count);
@@ -102,20 +104,31 @@ public class SGGameManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Spawnea un patito a la derecha.
+    /// </summary>
+    /// <param name="r">Índice del array de spawnpoints.</param>
     void SpawnRight(int r) {
         GameObject patitoNew;
         randomDuckId = Random.Range(0, 3);
-        patitoNew = (GameObject)Instantiate(patitos[randomDuckId], spawnPoints[r].position, Quaternion.identity);
+        patitoNew = (GameObject)Instantiate(duckies[randomDuckId], spawnPoints[r].position, Quaternion.identity);
         patitoNew.GetComponentInChildren<Target>().myDirection = 0;
     }
 
-    void SpawnLeft(int r) {
+    /// <summary>
+    /// Spawnea un patito a la izquierda.
+    /// </summary>
+    /// <param name="l"></param>
+    void SpawnLeft(int l) {
         GameObject patitoNew;
         randomDuckId = Random.Range(3, 6);
-        patitoNew = (GameObject)Instantiate(patitos[randomDuckId], spawnPoints[r].position, Quaternion.identity);
+        patitoNew = (GameObject)Instantiate(duckies[randomDuckId], spawnPoints[l].position, Quaternion.identity);
         patitoNew.GetComponentInChildren<Target>().myDirection = 1;
     }
 
+    /// <summary>
+    /// Gestiona la cuenta atrás del tiempo.
+    /// </summary>
     public void CountDown() {
         if (gameSeconds == 0)
         {
@@ -132,19 +145,26 @@ public class SGGameManager : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// Gestiona la cuenta del tiempo.
+    /// </summary>
     public void CountUp() {
         gameSeconds += 1;
         uiMan.TimeManager(gameSeconds);
     }
 
-
+    /// <summary>
+    /// Añade puntos por cada patito disparado.
+    /// </summary>
     public void AddPoints(int amount) 
     {
         points += amount;
         uiMan.PointsManager(points);
-        //pointsText.text = "Points: " + points;
     }
 
+    /// <summary>
+    /// Gestiona la finalización del juego.
+    /// </summary>
     public void GameOver()
     {
         //INFINITE

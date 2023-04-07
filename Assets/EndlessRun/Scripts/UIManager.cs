@@ -13,6 +13,7 @@ public class UIManager : MonoBehaviour
     public List<Image> pointsPositions;
 
     public Text finalPointsText;
+    public Toggle lifesMode, onehitMode;
 
     private Animator anim;
 
@@ -20,32 +21,22 @@ public class UIManager : MonoBehaviour
     Color colorWhite = new Color(1f, 1f, 1f, 1f);
 
     int uni, dec, cen, mil, demill;
-
     int points;
     int gamemode;
 
-    public Toggle lifesMode, onehitMode;
 
     private void Awake()
     {
         anim = GetComponent<Animator>();
         Time.timeScale = 0f;
-
     }
 
-    // Start is called before the first frame update
     void Start()
     {
-        //Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 0f;
         points = 0;
-        //pointsPositions[1].color = colorTransparent;
-        //pointsPositions[2].color = colorTransparent;
-        //pointsPositions[3].color = colorTransparent;
-        //pointsPositions[4].color = colorTransparent;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.P))
@@ -54,6 +45,9 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Pausa o despausa el juego, ejecutando la animación para la intefaz y ocultando/mostrando el ratón.
+    /// </summary>
     public void PauseGame()
     {
         if (paused)
@@ -74,14 +68,21 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Carga las escenas en función del nombre.
+    /// </summary>
+    /// <param name="name">Nombre de la escena.</param>
     public void LoadSceneByName(string name)
     {
         SceneManager.LoadScene(name);
     }
 
+    /// <summary>
+    /// Comienza el juego.
+    /// </summary>
+    /// <returns>Devuelve el número de vidas que tendrá el jugador dependiendo del modo de juego.</returns>
     public int StartGame()
     {
-        
         anim.SetTrigger("GameIDLE");
         Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 1f;
@@ -100,12 +101,18 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Comienza la cuenta de los puntos.
+    /// </summary>
     public void StartPoints()
     {
         points += 1;
         PointsManager(points);
     }
 
+    /// <summary>
+    /// Gestión de la finalización del juego.
+    /// </summary>
     public void GameOver() {
         CancelInvoke();
         finalPointsText.text = points + " points.";
@@ -115,8 +122,10 @@ public class UIManager : MonoBehaviour
         anim.SetTrigger("GameOver");
     }
 
-    #region INGAME 
-
+    /// <summary>
+    /// Gestión del tiempo.
+    /// </summary>
+    /// <param name="number">Segundos de juego.</param>
     public void TimeManager(int number)
     {
 
@@ -147,6 +156,10 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Gestión de puntos.
+    /// </summary>
+    /// <param name="number">Número de puntos a pintar.</param>
     public void PointsManager(int number)
     {
         //1-9
@@ -223,5 +236,4 @@ public class UIManager : MonoBehaviour
             pointsPositions[4].sprite = timeImages[uni];
         }
     }
-    #endregion
 }

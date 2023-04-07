@@ -7,16 +7,12 @@ using UnityEngine.SceneManagement;
 public class SGUIManager : MonoBehaviour
 {
 
-    private bool paused = false;
-
     public List<Sprite> timeImages;
     public List<Image> timePositions;
     public List<Image> pointsPositions;
+
     public GameObject timeSliderGO;
-
-
     public Text finalPointsText;
-
     private Animator anim;
 
     Color colorTransparent = new Color(0f, 0f, 0f, 0f);
@@ -24,6 +20,7 @@ public class SGUIManager : MonoBehaviour
 
     int uni, dec, cen, mil, demill;
 
+    private bool paused = false;
     bool gameIsStarted = false;
 
     private void Awake()
@@ -34,6 +31,9 @@ public class SGUIManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
     }
 
+    /// <summary>
+    /// Comienza el juego.
+    /// </summary>
     public void StartGame()
     {
         gameIsStarted = true;
@@ -46,7 +46,6 @@ public class SGUIManager : MonoBehaviour
         pointsPositions[4].color = colorTransparent;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (gameIsStarted && Input.GetKeyDown(KeyCode.P)) {
@@ -54,6 +53,9 @@ public class SGUIManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Pausa/Despausa el juego y controla el cursor.
+    /// </summary>
     public void PauseGame() {
         if (paused)
         {
@@ -72,15 +74,26 @@ public class SGUIManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Carga la escena según el nombre.
+    /// </summary>
+    /// <param name="name">Nombre de la escena.</param>
     public void LoadSceneByName(string name) {
         SceneManager.LoadScene(name);
     }
 
+    /// <summary>
+    /// Oculta/Muestra el slider del modo de juego por tiempo.
+    /// </summary>
+    /// <param name="active">Ocultar/mostrar</param>
     public void HideTimeSlider(bool active)
     {
         timeSliderGO.SetActive(active);
     }
 
+    /// <summary>
+    /// Invoca la transición de game over de la intefaz y la lógica de la finalización del juego.
+    /// </summary>
     private void GameOverTransition() {
         Time.timeScale = 0f;
         Cursor.lockState = CursorLockMode.None;
@@ -88,6 +101,10 @@ public class SGUIManager : MonoBehaviour
         CancelInvoke();
     }
 
+    /// <summary>
+    /// Lógica para finalizar el juego.
+    /// </summary>
+    /// <param name="points">Puntos finales.</param>
     public void GameOver(int points) {
         gameIsStarted = false;
         finalPointsText.text = points + " points.";
@@ -95,8 +112,10 @@ public class SGUIManager : MonoBehaviour
 
     }
 
-    #region INGAME 
-
+    /// <summary>
+    /// Gestión del tiempo.
+    /// </summary>
+    /// <param name="number">Segundos de juego.</param>
     public void TimeManager(int number) {
 
         if (number == -1)
@@ -154,7 +173,10 @@ public class SGUIManager : MonoBehaviour
 
         }
     }
-
+    /// <summary>
+    /// Gestión de los puntos.
+    /// </summary>
+    /// <param name="number">Puntos.</param>
     public void PointsManager(int number) {
         //1-9
         if (number < 10) {
@@ -225,5 +247,4 @@ public class SGUIManager : MonoBehaviour
             pointsPositions[4].sprite = timeImages[uni];
         }
     }
-    #endregion
 }

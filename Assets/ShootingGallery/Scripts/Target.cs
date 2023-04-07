@@ -5,6 +5,7 @@ public class Target : MonoBehaviour
     GameObject myParent;
     Animator parentAnimator;
     SGGameManager gameMan;
+
     float health = 10f;
     public bool alive = true;
     public int myDirection;
@@ -31,6 +32,10 @@ public class Target : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Lógica para que los patitos reciban daño.
+    /// </summary>
+    /// <param name="dmg">Daño recibido.</param>
     public void TakeDamage(float dmg)
     {
         //La condición impide que el jugador dispare de nuevo a un patito que está muriendo
@@ -45,12 +50,18 @@ public class Target : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// LLama a la animación de morir del patito y añade los puntos.
+    /// </summary>
     void Die()
     {
         parentAnimator.SetTrigger("Die");
         gameMan.AddPoints(100 * type); //CAMBIAR DEPENDIENDO DEL PATITO
     }
 
+    /// <summary>
+    /// Destruye el objeto padre.
+    /// </summary>
     public void DestroyThis() {
         Destroy(myParent);
     }

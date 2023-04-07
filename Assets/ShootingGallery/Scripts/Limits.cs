@@ -7,6 +7,11 @@ public class Limits : MonoBehaviour
     void Awake() {
         sgManager = FindObjectOfType<SGGameManager>();
     }
+
+    /// <summary>
+    /// Destruye los "target" que colisionen con el objeto.
+    /// </summary>
+    /// <param name="other">Objeto que colisiona.</param>
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag.Equals("Target"))

@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,11 +9,10 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] private List<Transform> levelPieces;
     [SerializeField] private List<Transform> specialPieces;
     [SerializeField] private GameObject player;
+    public UIManager uiManager;
 
     private Vector3 lastEndPosition;
     private int pieceCount;
-
-    public UIManager uiManager;
 
     public enum GameMode
     {
@@ -35,13 +33,7 @@ public class LevelGenerator : MonoBehaviour
             SpawnLevelPiece();
         }
     }
-    // Start is called before the first frame update
-    void Start()
-    {
 
-    }
-
-    // Update is called once per frame
     void Update()
     {
         if (Vector3.Distance(player.transform.position, lastEndPosition) < PLAYER_DISTANCE_SPAWN_LEVEL_PIECE) {
@@ -58,6 +50,9 @@ public class LevelGenerator : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Aplica distintos parámetros dependiendo del modo de juego.
+    /// </summary>
     public void CustomizeGame() {
         int mode = uiManager.StartGame();
         if (mode == 1)
@@ -70,18 +65,30 @@ public class LevelGenerator : MonoBehaviour
         player.GetComponent<PlayerMovement>().SetInitialLifes(mode);
     }
 
+    /// <summary>
+    /// Spawnea un nuevo prefab de plataforma.
+    /// </summary>
     private void SpawnLevelPiece() {
         Transform chosenLevelPiece = levelPieces[Random.Range(0, levelPieces.Count)];
         Transform lastLevelPieceTransform = SpawnLevelPiece(chosenLevelPiece, lastEndPosition);
         lastEndPosition = lastLevelPieceTransform.Find("EndPosition").position;
     }
 
+    /// <summary>
+    /// Spawnea un nuevo prefab de plataforma especial.
+    /// </summary>
     private void SpawnSpecialPiece() {
         Transform chosenLevelPiece = specialPieces[Random.Range(0, specialPieces.Count)];
         Transform lastLevelPieceTransform = SpawnLevelPiece(chosenLevelPiece, lastEndPosition);
         lastEndPosition = lastLevelPieceTransform.Find("EndPosition").position;
     }
 
+    /// <summary>
+    /// Instancia un nuevo prefab en la posición indicada.
+    /// </summary>
+    /// <param name="levelPart">El tipo de plataforma a instanciar.</param>
+    /// <param name="position">El Vector3 de la posicion en la que se instanciará la plataforma.</param>
+    /// <returns></returns>
     private Transform SpawnLevelPiece(Transform levelPart, Vector3 position) {
         Transform pieceTransform = Instantiate(levelPart, position, Quaternion.identity);
         return pieceTransform;

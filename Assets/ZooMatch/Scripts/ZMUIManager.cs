@@ -13,38 +13,29 @@ public class ZMUIManager : MonoBehaviour
     public List<Image> timePositions;
     public List<Image> pointsPositions;
 
+    private Animator anim;
+    private GridManager gridManager;
+
+    public Text finalPointsText;
+
+    public Toggle infiniteMode, timeMode;
+    public Slider timeSlider, sizeSlider;
+    public GameObject timeSliderGO, sizeSliderGO, finishBTN;
+
+    public int mode;
     private int points;
     private bool paused = false;
     private int gameSeconds;
     int uni, dec, cen, mil, demill;
 
-
-    public Text finalPointsText;
-
-
     Color colorTransparent = new Color(0f, 0f, 0f, 0f);
     Color colorWhite = new Color(1f, 1f, 1f, 1f);
 
-    public int mode;
-    public Toggle infiniteMode, timeMode;
-    public Slider timeSlider, sizeSlider;
-    public GameObject timeSliderGO, sizeSliderGO, finishBTN;
-
-
-    private Animator anim;
-    private GridManager gridManager;
     private void Awake()
     {
         anim = GetComponent<Animator>();
         gridManager = FindObjectOfType<GridManager>();
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.P))
@@ -217,7 +208,6 @@ public class ZMUIManager : MonoBehaviour
         if (numPieces != 0) {
             potionsNum++;
             points += 10 * numPieces;
-            Debug.Log(points);
             pointsText.text = points.ToString();
             potionsText.text = "x"+potionsNum.ToString();
         }
@@ -337,7 +327,6 @@ public class ZMUIManager : MonoBehaviour
     private void GameOverTransition()
     {
         Time.timeScale = 0f;
-        //Cursor.lockState = CursorLockMode.None;
         anim.SetTrigger("GameOver");
         CancelInvoke();
     }

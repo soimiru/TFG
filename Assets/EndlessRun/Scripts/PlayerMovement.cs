@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
 
     private UIManager uiManager;
 
+   
     public List<GameObject> lifeSprites;
 
     public int lifes = 3;
