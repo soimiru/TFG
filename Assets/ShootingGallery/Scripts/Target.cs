@@ -6,7 +6,7 @@ public class Target : MonoBehaviour
     Animator parentAnimator;
     SGGameManager gameMan;
     float health = 10f;
-    private bool alive = true;
+    public bool alive = true;
     public int myDirection;
     public int type;
 

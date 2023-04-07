@@ -460,17 +460,17 @@ MonoBehaviour:
   m_Text: 'Welcome to LuckyDucky, the fun and exciting shooting gallery game where
     you get to test your aim and reflexes by shooting ducks!
 
-    
 
-    In this
-    game, you''ll have a limited time to shoot as many ducks as possible. Each duck
-    you hit will earn you points, and the more ducks you hit, the higher your score
-    will be.
 
-    
+    In this game,
+    you''ll have a limited time to shoot as many ducks as possible. Each duck you
+    hit will earn you points, and the more ducks you hit, the higher your score will
+    be.
 
-    But be careful, some ducks are worth more points than others,
-    and some ducks move faster than others, making them more difficult to hit! '
+
+
+    But be careful, some ducks are worth more points than others, and
+    some ducks move faster than others, making them more difficult to hit! '
 --- !u!222 &89193767
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -684,9 +684,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   images:
-  - {fileID: 21300000, guid: 42993fb93e4658e4a95878f810097e67, type: 3}
-  - {fileID: 21300000, guid: 5ecd7e5afe5875746ba1cba42fdf13d2, type: 3}
-  - {fileID: 21300000, guid: cb26c67850195cf4d8867bb46109fb92, type: 3}
+  - {fileID: 21300000, guid: 5082cc86880304f40856323b46fada77, type: 3}
+  - {fileID: 21300000, guid: 202e4bcac3d248948b2ccd96a0933989, type: 3}
+  - {fileID: 21300000, guid: 6fcd9ac620c9b1e4a86d48f6f43c48f2, type: 3}
 --- !u!114 &188797228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3011,9 +3011,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   images:
-  - {fileID: 21300000, guid: 42993fb93e4658e4a95878f810097e67, type: 3}
-  - {fileID: 21300000, guid: 5ecd7e5afe5875746ba1cba42fdf13d2, type: 3}
-  - {fileID: 21300000, guid: cb26c67850195cf4d8867bb46109fb92, type: 3}
+  - {fileID: 21300000, guid: 6335d301ce0445c4b812d6f561bd6282, type: 3}
+  - {fileID: 21300000, guid: e997490797e08a34fbcdbc1edc67d0f4, type: 3}
+  - {fileID: 21300000, guid: 45e56c33ed4a4b24fb1a877ebaa0e7a8, type: 3}
 --- !u!1 &1147984108
 GameObject:
   m_ObjectHideFlags: 0
@@ -3879,6 +3879,7 @@ MonoBehaviour:
   images:
   - {fileID: 21300000, guid: dac57e59e84c5d845a0eeb7876008e23, type: 3}
   - {fileID: 21300000, guid: 87286c38dc58ae4469f5e3b71f627cf3, type: 3}
+  - {fileID: 21300000, guid: f771ce97ee1920443ae7fb7ed5999115, type: 3}
 --- !u!114 &1492626098
 MonoBehaviour:
   m_ObjectHideFlags: 0

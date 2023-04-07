@@ -13,7 +13,7 @@ public class Limits : MonoBehaviour
         {
             //Llama a la función del script Target y destruye el gameobject padre
             other.GetComponent<Target>().DestroyThis();
-            if (sgManager.mode == 0) {
+            if (sgManager.mode == 0 && other.GetComponent<Target>().alive) {
                 sgManager.GameOver();
             }
         }

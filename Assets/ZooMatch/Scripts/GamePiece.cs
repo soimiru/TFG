@@ -62,11 +62,18 @@ public class GamePiece : MonoBehaviour
         get { return clearComponent; }
     }
 
+    private ClearLine clearLineComponent;
+    public ClearLine ClearLineComponent
+    {
+        get { return clearLineComponent; }
+    }
+
     private void Awake()
     {
         movableComponent = GetComponent<MovablePiece>();
         colorComponent = GetComponent<ColorPiece>();
         clearComponent = GetComponent<ClearablePiece>();
+        clearLineComponent = GetComponent<ClearLine>();
     }
 
     public void Init(int _x, int _y, GridManager _grid, GridManager.PieceType _type) {

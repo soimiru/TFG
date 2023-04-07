@@ -379,11 +379,6 @@ public class GridManager : MonoBehaviour
                         for (int i = 0; i < match.Count; i++) {
                             if (ClearGridPiece(match[i].X, match[i].Y)) {
                                 needsRefill = true;
-
-                                if (match[i] == pressedPiece || match[i] == enteredPiece) {
-                                    specialPieceX = match[i].X;
-                                    specialPieceY = match[i].Y;
-                                }
                             }
                         }
                         //Si specialPieceType no es el tipo base, se crea una nueva pieza especial donde corresponda.
@@ -408,7 +403,7 @@ public class GridManager : MonoBehaviour
     }
 
     public bool ClearGridPiece(int x, int y) {
-        if (pieces[x, y].IsClearable() && !pieces[x, y].ClearComponent.IsBeingCleared)
+        if (pieces[x, y].IsClearable() && !pieces[x, y].ClearComponent.IsBeingCleared && (pieces[x,y].Type != PieceType.COLUMN_CLEAR && pieces[x, y].Type != PieceType.ROW_CLEAR))
         {
             pieces[x, y].ClearComponent.ClearPiece();
 
@@ -416,23 +411,42 @@ public class GridManager : MonoBehaviour
             return true;
         }
         else {
+            Debug.Log("X = " + x + ", Y = " + y);
+            if(pieces[x, y].Type != PieceType.EMPTY && !pieces[x, y].ClearComponent.IsBeingCleared && (pieces[x, y].Type == PieceType.COLUMN_CLEAR || pieces[x, y].Type == PieceType.ROW_CLEAR)){
+                pieces[x, y].ClearLineComponent.isRow = (pieces[x, y].Type == PieceType.COLUMN_CLEAR) ? false : true;
+                pieces[x, y].ClearLineComponent.Clear();
+                SpawnNewPiece(x, y, PieceType.EMPTY);
+                return true;
+            }
+            else if (pieces[x, y].Type == PieceType.EMPTY || pieces[x, y].ClearComponent.IsBeingCleared)
+            {
+                return true;
+            }
             return false;
         }
     }
 
     public void ClearRow(int row) {
         for (int x = 0; x < xDim; x++) {
-            if (pieces[x, row].Type != PieceType.OBSTACLE)
+            if (pieces[x, row].Type != PieceType.EMPTY && pieces[x, row].Type != PieceType.OBSTACLE)
             {
-                ClearGridPiece(x, row);
+                if (pieces[x, row].IsClearable() && !pieces[x, row].ClearComponent.IsBeingCleared)
+                {
+                    pieces[x, row].ClearComponent.ClearPiece();
+                    SpawnNewPiece(x, row, PieceType.EMPTY);
+                }
             }
         }
     }
 
     public void ClearColumn(int col) {
         for (int y = 0; y < yDim; y++) {
-            if (pieces[col, y].Type != PieceType.OBSTACLE) { 
-                ClearGridPiece(col, y);
+            if (pieces[col, y].Type != PieceType.EMPTY && pieces[col, y].Type != PieceType.OBSTACLE) {
+                if (pieces[col, y].IsClearable() && !pieces[col, y].ClearComponent.IsBeingCleared)
+                {
+                    pieces[col, y].ClearComponent.ClearPiece();
+                    SpawnNewPiece(col, y, PieceType.EMPTY);
+                }
             }
             
         }
