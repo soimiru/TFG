@@ -62,6 +62,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void Jump() {
+        SoundManager.Instance.PlaySFX("Jump");
         characterAnimator.SetTrigger("Jumping");
         myRigidbody.velocity = Vector3.up * jumpForce;
         StartCoroutine(CheckIsGrounded());

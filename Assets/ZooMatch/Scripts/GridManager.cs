@@ -381,6 +381,13 @@ public class GridManager : MonoBehaviour
     #endregion
 
     #region MATCH LOGIC
+    /// <summary>
+    /// Comprueba si tras realizar el movimiento, se han generado combinaciones válidas.
+    /// </summary>
+    /// <param name="piece"></param>
+    /// <param name="newX"></param>
+    /// <param name="newY"></param>
+    /// <returns></returns>
     public List<GamePiece> GetMatch(GamePiece piece, int newX, int newY)
     {
         if (piece.IsColored())
@@ -427,15 +434,6 @@ public class GridManager : MonoBehaviour
                     continue;
                 }
             }
-
-            //Añadimos al array de matching si hay más de 3 piezas iguales. 
-            //if (horizontalPieces.Count >= 3)
-            //{
-            //    for (int i = 0; i < horizontalPieces.Count; i++)
-            //    {
-            //        matchingPieces.Add(horizontalPieces[i]);
-            //    }
-            //}
 
 
             //Comprobamos combinaciones en forma de L
@@ -550,14 +548,6 @@ public class GridManager : MonoBehaviour
 
             }
 
-            //Añadimos al array de matching si hay más de 3 piezas iguales. 
-            //if (verticalPieces.Count >= 3)
-            //{
-            //    for (int i = 0; i < verticalPieces.Count; i++)
-            //    {
-            //        matchingPieces.Add(verticalPieces[i]);
-            //    }
-            //}
 
             //Comprobamos las combinaciones en forma de L
             if (verticalPieces.Count >= 3)

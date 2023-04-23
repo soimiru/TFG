@@ -40,6 +40,7 @@ public class Target : MonoBehaviour
     {
         //La condición impide que el jugador dispare de nuevo a un patito que está muriendo
         if (alive) {
+            SoundManager.Instance.PlaySFX("Duck");
             health -= dmg;
             if (health <= 0)
             {

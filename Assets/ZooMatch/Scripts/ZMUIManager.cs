@@ -36,6 +36,12 @@ public class ZMUIManager : MonoBehaviour
         anim = GetComponent<Animator>();
         gridManager = FindObjectOfType<GridManager>();
     }
+
+    private void Start()
+    {
+        SoundManager.Instance.PlayMusic("Potions");
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.P))

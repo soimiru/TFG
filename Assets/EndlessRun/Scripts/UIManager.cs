@@ -35,6 +35,7 @@ public class UIManager : MonoBehaviour
     {
         Time.timeScale = 0f;
         points = 0;
+        SoundManager.Instance.PlayMusic("Jumps");
     }
 
     void Update()

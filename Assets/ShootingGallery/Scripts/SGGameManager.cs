@@ -29,6 +29,11 @@ public class SGGameManager : MonoBehaviour
         uiMan = mainCanvas.GetComponent<SGUIManager>();
     }
 
+    private void Start()
+    {
+        SoundManager.Instance.PlayMusic("Ducks");
+    }
+
     /// <summary>
     /// Comprueba el toogle que está activo.
     /// </summary>
