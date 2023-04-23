@@ -38,8 +38,12 @@ public class GridManager : MonoBehaviour
     private GamePiece pressedPiece;
     private GamePiece enteredPiece;
 
+    /// <summary>
+    /// Método que comienza el juego.
+    /// </summary>
     public void StartGame()
     {
+        //Se crea un diccionario que contiene los tipos de piezas.
         piecePrefabDict = new Dictionary<PieceType, GameObject>();
         for (int i = 0; i < piecePrefabs.Length; i++)
         {
@@ -48,6 +52,7 @@ public class GridManager : MonoBehaviour
             }
         }
 
+        //Se crea el tablero con las dimensiones XDIM y YDIM
         for (int x = 0; x < xDim; x++)
         {
             for (int y = 0; y < yDim; y++)
@@ -68,11 +73,13 @@ public class GridManager : MonoBehaviour
                     background.GetComponent<TileBackground>().SetTile(TileBackground.TileType.CENTER3);
                 }
 
+                //Pone nombre a las piezas para mejorar su visibilidad como GameObjects
                 background.name = "BG["+x+", "+y+"]";
                 background.transform.SetParent(transform, false);
             }
         }
 
+        //Se instancian tantas piezas como tenga el tablero según sus dimensiones.
         pieces = new GamePiece[xDim, yDim];
         for (int x = 0; x < xDim; x++)
         {
@@ -85,10 +92,15 @@ public class GridManager : MonoBehaviour
         //Destroy(pieces[4, 4].gameObject);
         //SpawnNewPiece(4,4,PieceType.OBSTACLE);
 
+        //Llama a la corutina de llenado que se encargará de rellenar el tablero.
         StartCoroutine(Fill());
 
     }
 
+    /// <summary>
+    /// Rellena el tablero con las piezas necesarias después de comprobar que es necesario hacerlo.
+    /// </summary>
+    /// <returns></returns>
     public IEnumerator Fill() {
 
         bool needsRefill = true;
@@ -104,7 +116,12 @@ public class GridManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Método que gestiona el movimiento de las piezas a lo largo del tablero para que se rellene. 
+    /// </summary>
+    /// <returns></returns>
     public bool FillStep() { 
+        //Va comprobando si existen piezas debajo para moverse y ocupar los lugares vacíos.
         bool movedPiece = false;
         for (int y = yDim-2; y >= 0; y--)
         {
@@ -186,11 +203,24 @@ public class GridManager : MonoBehaviour
         return movedPiece;
     }
 
+    /// <summary>
+    /// Obtiene la posición del mundo para instanciar nuevas piezas.
+    /// </summary>
+    /// <param name="x">Coordenada X</param>
+    /// <param name="y">Coordenada Y</param>
+    /// <returns></returns>
     public Vector2 GetWorldPosition(int x, int y) {
         return new Vector2(transform.position.x - xDim / 2.0f + x,
             transform.position.y + yDim /2.0f - y);
     }
 
+    /// <summary>
+    /// Genera una nueva pieza en la posición indicada y del tipo indicado.
+    /// </summary>
+    /// <param name="x">Coordenada X</param>
+    /// <param name="y">Coordenada Y</param>
+    /// <param name="type">Tipo de pieza a generar.</param>
+    /// <returns></returns>
     public GamePiece SpawnNewPiece(int x, int y, PieceType type) {
         GameObject newPiece = (GameObject)Instantiate(piecePrefabDict[type], GetWorldPosition(x, y), Quaternion.identity);
         newPiece.transform.SetParent(transform, false);
@@ -201,6 +231,12 @@ public class GridManager : MonoBehaviour
         return pieces[x, y];
     }
 
+    /// <summary>
+    /// Comprueba que las dos piezas son adjacentes para poder hacer movimientos con ellas.
+    /// </summary>
+    /// <param name="piece1"></param>
+    /// <param name="piece2"></param>
+    /// <returns></returns>
     public bool IsAdjacent(GamePiece piece1, GamePiece piece2) {
         if (piece1.X == piece2.X && ((int)Mathf.Abs(piece1.Y - piece2.Y) == 1))
         {
@@ -215,6 +251,11 @@ public class GridManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Intercambia las piezas seleccionadas para hacer una combinación entre ellas.
+    /// </summary>
+    /// <param name="piece1">Pieza 1</param>
+    /// <param name="piece2">Pieza 2</param>
     public void SwapPieces(GamePiece piece1, GamePiece piece2) {
         if (piece1.IsMovable() && piece2.IsMovable()) {
             pieces[piece1.X, piece1.Y] = piece2;
@@ -250,6 +291,10 @@ public class GridManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Limpia todas las combinaciones del tablero.
+    /// </summary>
+    /// <returns>Devuelve si se necesita rellenar el tablero o no</returns>
     public bool ClearAllValidMatches()
     {
         bool needsRefill = false;
@@ -311,6 +356,13 @@ public class GridManager : MonoBehaviour
         return needsRefill;
     }
 
+
+    /// <summary>
+    /// Limpia la pieza del tablero seleccionada.
+    /// </summary>
+    /// <param name="x">Coordenada X</param>
+    /// <param name="y">Coordenada Y</param>
+    /// <returns></returns>
     public bool ClearGridPiece(int x, int y) {
         if (pieces[x, y].IsClearable() && !pieces[x, y].ClearComponent.IsBeingCleared && (pieces[x,y].Type != PieceType.COLUMN_CLEAR && pieces[x, y].Type != PieceType.ROW_CLEAR))
         {
@@ -334,6 +386,10 @@ public class GridManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Limpia una fila entera.
+    /// </summary>
+    /// <param name="row">Índice de la fila a limpiar</param>
     public void ClearRow(int row) {
         for (int x = 0; x < xDim; x++) {
             if (pieces[x, row].Type != PieceType.EMPTY && pieces[x, row].Type != PieceType.OBSTACLE)
@@ -347,6 +403,10 @@ public class GridManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Limpia una columna entera
+    /// </summary>
+    /// <param name="col">Índice de la columna a limpiar</param>
     public void ClearColumn(int col) {
         for (int y = 0; y < yDim; y++) {
             if (pieces[col, y].Type != PieceType.EMPTY && pieces[col, y].Type != PieceType.OBSTACLE) {
@@ -382,11 +442,11 @@ public class GridManager : MonoBehaviour
 
     #region MATCH LOGIC
     /// <summary>
-    /// Comprueba si tras realizar el movimiento, se han generado combinaciones válidas.
+    /// Comprueba si tras realizar el movimiento de las piezas seleccionadas, se han generado combinaciones válidas.
     /// </summary>
-    /// <param name="piece"></param>
-    /// <param name="newX"></param>
-    /// <param name="newY"></param>
+    /// <param name="piece">Pieza</param>
+    /// <param name="newX">Nueva posicion X</param>
+    /// <param name="newY">Nueva posición Y</param>
     /// <returns></returns>
     public List<GamePiece> GetMatch(GamePiece piece, int newX, int newY)
     {

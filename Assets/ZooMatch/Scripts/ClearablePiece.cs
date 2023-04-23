@@ -1,6 +1,9 @@
 using System.Collections;
 using UnityEngine;
 
+/// <summary>
+/// Componente "Clearable" de las piezas. Sirve para indicar si la pieza se está limpiando y para ejecutar la animación. 
+/// </summary>
 public class ClearablePiece : MonoBehaviour
 {
     public AnimationClip clearAnimation;
@@ -28,12 +31,19 @@ public class ClearablePiece : MonoBehaviour
         StartCoroutine(ClearCoroutine());
     }
 
+    /// <summary>
+    /// Indica que la pieza se está limpiando y llama la corutina ClearCoroutine
+    /// </summary>
     public void ClearPiece() {
         isBeingCleared = true;
 
         StartCoroutine(ClearCoroutine());
     }
 
+    /// <summary>
+    /// Ejecuta la animación de limpieza, espera los segundos que dura la animación y destruye el game object de la pieza
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator ClearCoroutine() {
         Animator anim = GetComponent<Animator>();
 

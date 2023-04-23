@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-//GamePiece class, has all the Piece components
-//Also contais Mouse events that comunicates with GridManager
+/// <summary>
+/// La clase de la Pieza del juego. Contiene todos los componentes asociados a la pieza y los eventos para comunicarse con el GridManager.
+/// </summary>
 public class GamePiece : MonoBehaviour
 {
     [SerializeField]

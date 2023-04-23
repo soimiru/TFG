@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -69,6 +68,9 @@ public class ZMUIManager : MonoBehaviour
         sizeSliderGO.SetActive(!active);
     }
 
+    /// <summary>
+    /// Customiza el juego en función de las opciones que introduzca el jugador.
+    /// </summary>
     public void CustomizeGame() {
         //GAME CUSTOMIZATION
         //MODO INFINITO
@@ -104,6 +106,10 @@ public class ZMUIManager : MonoBehaviour
         }
         StartGame();
     }
+
+    /// <summary>
+    /// Comienza el juego.
+    /// </summary>
     void StartGame() {
 
         //MODO INFINITO
@@ -126,6 +132,70 @@ public class ZMUIManager : MonoBehaviour
         AddPoints(0);
     }
 
+    /// <summary>
+    /// Pausa/Despausa el juego.
+    /// </summary>
+    public void PauseGame()
+    {
+        if (paused)
+        {
+            Time.timeScale = 1f;
+            anim.SetTrigger("P_OUT");
+            paused = false;
+        }
+        else
+        {
+            Time.timeScale = 0f;
+            anim.SetTrigger("P_IN");
+            paused = true;
+        }
+    }
+
+    /// <summary>
+    /// Método que gestiona la finalización del juego.
+    /// </summary>
+    public void GameOver()
+    {
+        //gameIsStarted = false;
+        //INFINITE
+        if (mode == 0) {
+            TimeManager(-2);
+        }
+        //TIME
+        else
+        {
+            TimeManager(-1);
+        }
+        finalPointsText.text = points + " points.";
+        Invoke("GameOverTransition", 1f);
+
+    }
+
+    /// <summary>
+    /// Se invoca después de un segundo y lanza la animación de la interfaz para los puntos.
+    /// </summary>
+    private void GameOverTransition()
+    {
+        Time.timeScale = 0f;
+        anim.SetTrigger("GameOver");
+        CancelInvoke();
+    }
+
+    /// <summary>
+    /// Método para gestionar las escenas.
+    /// </summary>
+    /// <param name="name"></param>
+    public void LoadSceneByName(string name)
+    {
+        SceneManager.LoadScene(name);
+    }
+
+
+    #region TIME MANAGER
+
+    /// <summary>
+    /// Método para gestionar la cuenta atrás.
+    /// </summary>
     public void CountDown()
     {
         if (gameSeconds == 0)
@@ -143,11 +213,19 @@ public class ZMUIManager : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Método para gestionar la cuenta hacia adelante.
+    /// </summary>
     public void CountUp()
     {
         gameSeconds += 1;
         TimeManager(gameSeconds);
     }
+
+    /// <summary>
+    /// Método para gestionar el tiempo.
+    /// </summary>
+    /// <param name="number">Número de segundos</param>
     public void TimeManager(int number)
     {
 
@@ -208,17 +286,28 @@ public class ZMUIManager : MonoBehaviour
         }
     }
 
+    #endregion
 
-
-    public void AddPoints(int numPieces) {
-        if (numPieces != 0) {
+    #region POINTS MANAGER
+    /// <summary>
+    /// Añade puntos cuando ocurre algo.
+    /// </summary>
+    /// <param name="numPieces"></param>
+    public void AddPoints(int numPieces)
+    {
+        if (numPieces != 0)
+        {
             potionsNum++;
             points += 10 * numPieces;
             pointsText.text = points.ToString();
-            potionsText.text = "x"+potionsNum.ToString();
+            potionsText.text = "x" + potionsNum.ToString();
         }
     }
 
+    /// <summary>
+    /// Método para gestionar la UI de los puntos.
+    /// </summary>
+    /// <param name="number"></param>
     public void PointsManager(int number)
     {
         //1-9
@@ -296,49 +385,6 @@ public class ZMUIManager : MonoBehaviour
         }
     }
 
+    #endregion
 
-    public void PauseGame()
-    {
-        if (paused)
-        {
-            Time.timeScale = 1f;
-            anim.SetTrigger("P_OUT");
-            paused = false;
-        }
-        else
-        {
-            Time.timeScale = 0f;
-            anim.SetTrigger("P_IN");
-            paused = true;
-        }
-    }
-
-    public void GameOver()
-    {
-        //gameIsStarted = false;
-        //INFINITE
-        if (mode == 0) {
-            TimeManager(-2);
-        }
-        //TIME
-        else
-        {
-            TimeManager(-1);
-        }
-        finalPointsText.text = points + " points.";
-        Invoke("GameOverTransition", 1f);
-
-    }
-
-    private void GameOverTransition()
-    {
-        Time.timeScale = 0f;
-        anim.SetTrigger("GameOver");
-        CancelInvoke();
-    }
-
-    public void LoadSceneByName(string name)
-    {
-        SceneManager.LoadScene(name);
-    }
 }

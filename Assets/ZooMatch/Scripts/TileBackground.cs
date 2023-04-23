@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-//Generates Background tiles
+/// <summary>
+/// Gestiona el fondo de las casillas. Pensado para poner distintos tipos de casillas dependiendo de su posición en el tablero. Finalmente se dejó una única casilla para mayor limpieza visual.
+/// </summary>
 public class TileBackground : MonoBehaviour
 {
     public enum TileType
@@ -60,6 +61,10 @@ public class TileBackground : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Pone el fondo de la casilla
+    /// </summary>
+    /// <param name="newTile"></param>
     public void SetTile(TileType newTile)
     {
         tile = newTile;

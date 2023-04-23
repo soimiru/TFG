@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//Color logic
+/// <summary>
+/// Componente "Color" de las piezas.
+/// </summary>
 public class ColorPiece : MonoBehaviour
 {
     public enum ColorType { 
@@ -51,6 +53,10 @@ public class ColorPiece : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Especifica el color de la pieza.
+    /// </summary>
+    /// <param name="newColor">El ColorType que se asignará a la pieza</param>
     public void SetColor(ColorType newColor) {
         color = newColor;
         if (colorSpriteDICT.ContainsKey(newColor)) {

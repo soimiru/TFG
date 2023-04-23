@@ -1,7 +1,9 @@
 using System.Collections;
 using UnityEngine;
 
-//Piece movement logic
+/// <summary>
+/// Componente para gestionar el movimiento de las piezas.
+/// </summary>
 public class MovablePiece : MonoBehaviour
 {
     private GamePiece piece;
@@ -12,7 +14,12 @@ public class MovablePiece : MonoBehaviour
         piece = GetComponent<GamePiece>();
     }
 
-    //Move the piece to a new position
+    /// <summary>
+    /// Método que gestiona el movimiento de las piezas.
+    /// </summary>
+    /// <param name="newX">Nueva coordenada X</param>
+    /// <param name="newY">Nueva coordenada Y</param>
+    /// <param name="time">Tiempo que tarda en transcurrir la animación de movimiento</param>
     public void Move(int newX, int newY, float time) {
         /*
         piece.X = newY;
@@ -27,7 +34,13 @@ public class MovablePiece : MonoBehaviour
         StartCoroutine(moveCoroutine);
     }
 
-    //Makes the piece movement smooth
+    /// <summary>
+    /// Método que mejora y anima el movimiento de las piezas.
+    /// </summary>
+    /// <param name="newX">Nueva coordenada X</param>
+    /// <param name="newY">Nueva coordenada Y</param>
+    /// <param name="time">Tiempo que tarda en transcurrir la animación de movimiento</param>
+    /// <returns></returns>
     private IEnumerator MoveCoroutine(int newX, int newY, float time) {
 
         this.name = "Piece [" + newX + ", " + newY + "]";
