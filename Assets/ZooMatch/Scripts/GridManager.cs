@@ -28,6 +28,7 @@ public class GridManager : MonoBehaviour
 
     public PiecePrefab[] piecePrefabs;
     public GameObject backgroundPrefab;
+    public GameObject particlePrefab;
 
     private Dictionary<PieceType, GameObject> piecePrefabDict;
 
@@ -314,6 +315,8 @@ public class GridManager : MonoBehaviour
 
                         //Add Points
                         uiManager.AddPoints(match.Count);
+
+                        Instantiate(particlePrefab, match[0].transform.position, Quaternion.identity);
 
                         if (match.Count == 4) {
                             if (pressedPiece == null || enteredPiece == null)   //No se han hecho movimientos pero se ha generado una combinacion
