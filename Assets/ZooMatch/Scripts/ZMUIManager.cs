@@ -297,6 +297,7 @@ public class ZMUIManager : MonoBehaviour
     {
         if (numPieces != 0)
         {
+            SoundManager.Instance.PlaySFX("Pop");
             potionsNum++;
             points += 10 * numPieces;
             pointsText.text = points.ToString();
