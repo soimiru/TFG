@@ -92,9 +92,20 @@ public class PlayerMovement : MonoBehaviour
             this.gameObject.transform.position = resetPosition;
             ReduceLife();
         }
-        else if (other.gameObject.name.Equals("heart")) {
+        else if (other.gameObject.name.Equals("heart"))
+        {
             IncreaseLife(other.gameObject);
         }
+        else if (other.gameObject.tag.Equals("Jewel")) 
+        {
+            GetJewel(other.gameObject);
+        }
+    }
+
+    private void GetJewel(GameObject jewel) {
+        uiManager.AddPoints(10);
+        SoundManager.Instance.PlaySFX("Jewel");
+        Destroy(jewel);
     }
 
     private void ReduceLife() {
@@ -112,6 +123,7 @@ public class PlayerMovement : MonoBehaviour
         {
             lifes++;
             lifeSprites[lifes - 1].GetComponent<SpriteRenderer>().color = activeHeart;
+            SoundManager.Instance.PlaySFX("Heart");
             Destroy(other);
         }
     } 

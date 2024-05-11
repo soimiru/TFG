@@ -112,6 +112,14 @@ public class UIManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Añade puntos.
+    /// </summary>
+    /// <param name="num">Número de puntos a añadir</param>
+    public void AddPoints(int num) {
+        points += num;
+    }
+
+    /// <summary>
     /// Gestión de la finalización del juego.
     /// </summary>
     public void GameOver() {
